@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:contentDescription="@string/desc"
+        android:id="@+id/background_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/wood" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/dark_rectangle" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/LabelText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/msg_players" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <RadioGroup
+                    android:id="@+id/radio_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="10dp" >
+
+                    <RadioButton
+                        android:id="@+id/radio_play0"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/player1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_play1"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/players2" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radio_turn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp" >
+
+                    <RadioButton
+                        android:id="@+id/radio_turn0"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/goFst" />
+
+                    <RadioButton
+                        android:id="@+id/radio_turn1"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/goSnd" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/LabelText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/msg_diff" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <RadioGroup
+                    android:id="@+id/radio_diff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/radio_diff0"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/level1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_diff1"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/level2" />
+
+                    <RadioButton
+                        android:id="@+id/radio_diff2"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/level3" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radio_alg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="10dp" >
+
+                    <RadioButton
+                        android:id="@+id/radio_alg0"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/Alg1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_alg1"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Alg2" />
+                </RadioGroup>
+                
+                <RadioGroup
+                    android:id="@+id/radio_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="10dp" >
+
+                    <RadioButton
+                        android:id="@+id/radio_size0"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/Size1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_size1"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Size2" />
+                    
+                      <RadioButton
+                        android:id="@+id/radio_size2"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Size3" />
+                </RadioGroup>
+                
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/play_button"
+                style="@style/MyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/greenbutton"
+                android:maxWidth="400dp"
+                android:minWidth="200dp"
+                android:text="Play" />
+
+            <Button
+                android:id="@+id/open_settings"
+                style="@style/MyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/greenbutton"
+                android:maxWidth="400dp"
+                android:minWidth="200dp"
+                android:text="Settings" />
+
+            <Button
+                android:id="@+id/open_help"
+                style="@style/MyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/greenbutton"
+                android:maxWidth="400dp"
+                android:minWidth="200dp"
+                android:text="Help" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
