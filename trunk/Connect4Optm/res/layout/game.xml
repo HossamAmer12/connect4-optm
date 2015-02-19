@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- Background Image -->
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/desc"
+        android:scaleType="fitXY"
+        android:src="@drawable/wood" />
+
+    <!-- Player turn -->
+
+    <TextView
+        android:id="@+id/player_turn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Players turn "
+        android:textColor="#000"
+        android:textSize="40sp" />
+
+    <!-- Sliding Piece -->
+
+    <ca.uwaterloo.connect4optm.DropAreaView
+        android:id="@+id/sliding_piece"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player_turn" />
+
+    <!-- Bottom Buttons -->
+
+    <LinearLayout
+        android:id="@+id/game_btns"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btm_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bottom buttons"
+            android:textColor="#000"
+            android:textSize="5sp" />
+
+        <Button
+            android:id="@+id/btm_btns2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bottom buttons"
+            android:textColor="#000"
+            android:textSize="5sp" />
+
+        <Button
+            android:id="@+id/btm_btns3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bottom buttons"
+            android:textColor="#000"
+            android:textSize="5sp" />
+    </LinearLayout>
+
+    <!-- Board View -->
+
+    <LinearLayout
+        android:id="@+id/board_LId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal" >
+
+        <ca.uwaterloo.connect4optm.BoardView
+            android:id="@+id/my_custom_grid_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>
