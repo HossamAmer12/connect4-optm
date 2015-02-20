@@ -203,6 +203,9 @@ public class Connect4Activity extends ActionBarActivity implements
 		int yDest = Connect4Activity.nRows - top - 1;
 		int posDest = mBoardGridAdapter.getLinearPosition(xDest, yDest);
 
+		// Move the sliding piece automatically
+		onHintButton(xDest, yDest);
+		
 		int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
 
 		// Avoid overfill
