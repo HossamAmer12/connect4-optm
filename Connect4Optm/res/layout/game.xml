@@ -41,27 +41,33 @@
 
         <Button
             android:id="@+id/btm_btns"
+            style="@style/MyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bottom buttons"
-            android:textColor="#000"
-            android:textSize="5sp" />
+            android:background="@drawable/greenbutton"
+            android:maxWidth="400dp"
+            android:minWidth="200dp"
+            android:text="@string/restart" />
 
         <Button
             android:id="@+id/btm_btns2"
+            style="@style/MyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bottom buttons"
-            android:textColor="#000"
-            android:textSize="5sp" />
+            android:background="@drawable/greenbutton"
+            android:maxWidth="400dp"
+            android:minWidth="200dp"
+            android:text="@string/undo" />
 
         <Button
             android:id="@+id/btm_btns3"
+            style="@style/MyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bottom buttons"
-            android:textColor="#000"
-            android:textSize="5sp" />
+            android:background="@drawable/greenbutton"
+            android:maxWidth="400dp"
+            android:minWidth="200dp"
+            android:text="@string/hint" />
     </LinearLayout>
 
     <!-- Board View -->
