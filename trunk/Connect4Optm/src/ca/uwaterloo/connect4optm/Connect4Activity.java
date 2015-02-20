@@ -205,15 +205,21 @@ public class Connect4Activity extends ActionBarActivity implements
 		int xDest = click.getxIndex();
 		int yDest = Connect4Activity.nRows - top - 1;
 		int posDest = mBoardGridAdapter.getLinearPosition(xDest, yDest);
-
-		// Move the sliding piece automatically
-		onHintButton(xDest, yDest);
-
 		int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
 
 		// Avoid overfill
 		if (posDest < 0)
 			return;
+
+		// Align with column!
+//		if (Math.abs(mDropAreaView.getBallRect().left
+//				- mBoard.getChildAt(posSrc).getLeft()) > 15)
+//			return;
+
+		// Move the sliding piece automatically
+		onHintButton(xDest, yDest);
+
+		
 
 		// Align with column!
 		/*
@@ -260,57 +266,48 @@ public class Connect4Activity extends ActionBarActivity implements
 		Log.v("Main Activity ", "dx: " + dx);
 		Log.v("Main Activity ", "Window width : " + GameUtils.mScreenWidth);
 
-		 mDropAreaView.onMove(dx, 0);
-
-		 /*
-		final int total = dx;
-		final DropAreaView thisView = mDropAreaView;
-		
-		
-		TranslateAnimation slide;
-		if(xAbs > xSlidingPiece)
-		 slide = new TranslateAnimation(xAbs, xSlidingPiece, 0, 0);
-		else
-			slide = new TranslateAnimation(xSlidingPiece, xAbs, 0, 0);
-		//slide.setInterpolator(new BounceInterpolator());
-		slide.setDuration(GameUtils.ANIMATION_FALLING_TIME/3);
-		slide.setAnimationListener(new AnimationListener() {
-			
-			@Override
-			public void onAnimationStart(Animation animation) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				// TODO Auto-generated method stub
-				thisView.invalidate();
-				
-			}
-		});
-		
-		thisView.startAnimation(slide);
 		mDropAreaView.onMove(dx, 0);
-		*/
-//		final int offset = total/ 10;
-//		new Thread(new Runnable() {
-//			public void run() {
-//				mDropAreaView.post(new Runnable() {
-//					public void run() {
-//						int x = 0;
-//						mDropAreaView.onMove(offset + x, 0);
-//						x += offset;
-//					}
-//				});
-//			}
-//		}).start();
+
+		/*
+		 * final int total = dx; final DropAreaView thisView = mDropAreaView;
+		 * 
+		 * 
+		 * TranslateAnimation slide; if(xAbs > xSlidingPiece) slide = new
+		 * TranslateAnimation(xAbs, xSlidingPiece, 0, 0); else slide = new
+		 * TranslateAnimation(xSlidingPiece, xAbs, 0, 0);
+		 * //slide.setInterpolator(new BounceInterpolator());
+		 * slide.setDuration(GameUtils.ANIMATION_FALLING_TIME/3);
+		 * slide.setAnimationListener(new AnimationListener() {
+		 * 
+		 * @Override public void onAnimationStart(Animation animation) { // TODO
+		 * Auto-generated method stub
+		 * 
+		 * }
+		 * 
+		 * @Override public void onAnimationRepeat(Animation animation) { //
+		 * TODO Auto-generated method stub
+		 * 
+		 * }
+		 * 
+		 * @Override public void onAnimationEnd(Animation animation) { // TODO
+		 * Auto-generated method stub thisView.invalidate();
+		 * 
+		 * } });
+		 * 
+		 * thisView.startAnimation(slide); mDropAreaView.onMove(dx, 0);
+		 */
+		// final int offset = total/ 10;
+		// new Thread(new Runnable() {
+		// public void run() {
+		// mDropAreaView.post(new Runnable() {
+		// public void run() {
+		// int x = 0;
+		// mDropAreaView.onMove(offset + x, 0);
+		// x += offset;
+		// }
+		// });
+		// }
+		// }).start();
 
 		/*
 		 * boolean post = mDropAreaView.post(new Runnable() { public void run()
