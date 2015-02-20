@@ -28,6 +28,9 @@
     <string name="player1">1 player</string>
     <string name="players2">2 players</string>
     <string name="desc">Description</string>
+     <string name="restart">Restart</string>
+     <string name="undo">Undo</string>
+     <string name="hint">Hint</string>
     
     
 
