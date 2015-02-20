@@ -31,6 +31,9 @@ public class ConnectFourEngine {
 	private int currentPNumbers[][];
 
 	private int Constants[][];
+	private int posAnim;
+	private int posDest;
+	private int xInitial;
 
 	// private int currentP2Numbers[];
 
@@ -307,18 +310,18 @@ public class ConnectFourEngine {
 		for (i = 0; i < NumberOfConnectedDisks; i++) {
 			PNumbers[playernum - 1][i] += currentPNumbers[playernum - 1][i];
 		}
-		
-		int stored=Board[row][co];
-		Board[row][co]=player_inv(playernum);
-		
+
+		int stored = Board[row][co];
+		Board[row][co] = player_inv(playernum);
+
 		Scoringfn(row, co, player_inv(playernum));
-		
-		Board[row][co]=stored;
+
+		Board[row][co] = stored;
 		// System.arraycopy(currentPNumbers[player_inv(playernum)-1], 0,
 		// PNumbers[player_inv(playernum)-1], 0, NumberOfConnectedDisks);
 		for (i = 0; i < NumberOfConnectedDisks; i++) {
 			if (i < (NumberOfConnectedDisks - 1))
-				PNumbers[player_inv(playernum) - 1][i] -= currentPNumbers[player_inv(playernum) - 1][i+1];
+				PNumbers[player_inv(playernum) - 1][i] -= currentPNumbers[player_inv(playernum) - 1][i + 1];
 		}
 
 	}
@@ -740,7 +743,7 @@ public class ConnectFourEngine {
 					// save current score
 					int savedScore[][] = saveScore();
 					Scoringfn_cum(TopPositions[i] + 1, i, currentPlayer);
-					
+
 					if (currentDepth == 1) {
 						float endNodeScore;
 
@@ -900,4 +903,59 @@ public class ConnectFourEngine {
 		CopyRestoreBoard(0, 1);
 		return Move;
 	}
+
+	public void nextMoveHint_Android(int algorithmType, int difficultyLevel) {
+		// 0 minimax
+		// 1 Monte Carlo
+		if (algorithmType == 0) {
+			// Minimax
+			int Move = 0;
+
+			CopyRestoreBoard(1, 0);
+			Scoringfn_cum(TopPositions[latest_move], latest_move,
+					(Player_Turn == 1) ? 2 : 1);
+			MiniMaxMove BestMove = MiniMax(Player_Turn,
+					GameUtils.MINIMAX_DIFFICULTY_LEVEL[difficultyLevel],
+					-Float.MAX_VALUE, Float.MAX_VALUE, 1);
+			Move = BestMove.BestMove;
+			
+			
+			
+			posAnim= Move;
+			posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
+			System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+ "Col:"+ Move);
+			xInitial= Move;
+			
+			Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
+
+			CopyRestoreBoard(0, 1);
+		} else {
+			// Monte Carlo
+		}
+	}
+
+	public int getPosAnim() {
+		return posAnim;
+	}
+
+	public void setPosAnim(int posAnim) {
+		this.posAnim = posAnim;
+	}
+
+	public int getPosDest() {
+		return posDest;
+	}
+
+	public void setPosDest(int posDest) {
+		this.posDest = posDest;
+	}
+
+	public int getxInitial() {
+		return xInitial;
+	}
+
+	public void setxInitial(int xInitial) {
+		this.xInitial = xInitial;
+	}
+
 }

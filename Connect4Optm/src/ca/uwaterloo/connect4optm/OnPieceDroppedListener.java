@@ -34,7 +34,7 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 			mBoardViewAdapter.updateTopArray(xInitial);
 			
 			// Update the Engine
-//			mBoardView.mEngine.PlayerMove(xInitial);
+			mBoardView.mEngine.PlayerMove(xInitial);
 			
 			// Toggle!
 			mBoardView.togglePieceColor();
@@ -42,9 +42,10 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 
 			
 			// Check win!
-			if(mBoardView.checkWin())
+			if(mBoardView.checkWin()!=0){
+				System.out.println("Player: "+ mBoardView.checkWin() + " won!");
 				return;
-			
+			}
 			
 			
 			// Check the turn and computer player!

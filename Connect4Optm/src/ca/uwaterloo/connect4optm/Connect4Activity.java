@@ -263,6 +263,8 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		mBoard.animatePiece(posAnim, dy, posDest, xInitial);
 		mDropAreaView.togglePieceColor(newPieceType);
+		
+
 
 		// mBoard.animatePiece(posAnim, dy);
 		// mBoardGridAdapter.updatePieces(posDest, mBoard.mPieceType,

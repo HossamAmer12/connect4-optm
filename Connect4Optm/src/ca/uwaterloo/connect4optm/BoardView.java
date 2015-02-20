@@ -355,12 +355,15 @@ public class BoardView extends GridView implements
 		System.out.println("OnPieceDropped: Computer Move!");
 		
 		// Get the Engine position
-//		int tmp = mBoardView.mEngine.NextMoveHint_MC_Scoring(GameUtils.NUMBER_OF_PATHS);
+		this.mEngine.nextMoveHint_Android(this.mAlgorithm, this.mDifficultyLevel);
 		
 		int dx = 0;
-		int posAnim = 0;
-		int posDest = 35;
-		int xInitial = 0;
+		int posAnim = this.mEngine.getPosAnim();
+		int posDest = this.mEngine.getPosDest();
+		int xInitial = this.mEngine.getxInitial();
+		
+		//this.mEngine.PlayerMove(xInitial);
+		
 		int dy = this.getChildAt(posDest).getTop();
 
 		this.animatePiece(posAnim, dy, posDest, xInitial);	
@@ -369,11 +372,12 @@ public class BoardView extends GridView implements
 
 	}
 	
-	public boolean checkWin()
+	public int checkWin()
 	{
-		System.out.println("OnPieceDropped: CheckWin!");
+		
+		//System.out.println("OnPieceDropped: CheckWin!");
 		// TODO:
-		return false;
+		return this.mEngine.CheckWin();
 	}
 
 	public boolean isComputerPlayed() {

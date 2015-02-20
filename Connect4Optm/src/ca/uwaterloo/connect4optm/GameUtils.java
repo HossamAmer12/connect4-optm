@@ -27,6 +27,11 @@ public class GameUtils {
 	public static final String PREFS_ALG = "algorithm";
 	public static final String PREFS_SIZE = "size";
 
+	
+	//Minimax constants
+	public static final int[] MINIMAX_DIFFICULTY_LEVEL = {5, 7, 9};
+
+	
 	public static int easyLevel = 0;
 	public static int initPlayers = 0;
 	public static int goFst = 0;
