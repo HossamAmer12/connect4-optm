@@ -2,8 +2,6 @@ package ca.uwaterloo.connect4optm;
 
 import java.util.ArrayList;
 
-import ca.uwaterloo.connect4optm.GameUtils.PieceType;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -14,9 +12,14 @@ import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
+import ca.uwaterloo.connect4optm.GameUtils.PieceType;
 
 public class Connect4Activity extends ActionBarActivity implements
 		OnItemClickListener, IOnExitListener {
@@ -132,15 +135,15 @@ public class Connect4Activity extends ActionBarActivity implements
 		super.onWindowFocusChanged(hasFocus);
 
 		storeAbsolutePositions();
-		
+
 		// Change the bottom position of the droparea view
-//		int[] location = new int[2];
-//		mBoard.getChildAt(0).getLocationOnScreen(location);
-//		int yAbs = location[1];
-		
-//		yAbs = mBoard.getChildAt(0).getTop();
-//		mDropAreaView.setBottomPos(yAbs);
-		
+		// int[] location = new int[2];
+		// mBoard.getChildAt(0).getLocationOnScreen(location);
+		// int yAbs = location[1];
+
+		// yAbs = mBoard.getChildAt(0).getTop();
+		// mDropAreaView.setBottomPos(yAbs);
+
 	}
 
 	/**
@@ -205,7 +208,7 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Move the sliding piece automatically
 		onHintButton(xDest, yDest);
-		
+
 		int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
 
 		// Avoid overfill
@@ -214,10 +217,9 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Align with column!
 		/*
-		if (Math.abs(mDropAreaView.getBallRect().left
-				- mBoard.getChildAt(posSrc).getLeft()) > 15)
-			return;
-		*/
+		 * if (Math.abs(mDropAreaView.getBallRect().left -
+		 * mBoard.getChildAt(posSrc).getLeft()) > 15) return;
+		 */
 
 		int dy = mBoard.getChildAt(posDest).getTop();
 		int posAnim = mBoardGridAdapter.getLinearPosition(xInitial, 0);
@@ -258,8 +260,62 @@ public class Connect4Activity extends ActionBarActivity implements
 		Log.v("Main Activity ", "dx: " + dx);
 		Log.v("Main Activity ", "Window width : " + GameUtils.mScreenWidth);
 
-		mDropAreaView.onMove(dx, 0);
+		 mDropAreaView.onMove(dx, 0);
 
+		 /*
+		final int total = dx;
+		final DropAreaView thisView = mDropAreaView;
+		
+		
+		TranslateAnimation slide;
+		if(xAbs > xSlidingPiece)
+		 slide = new TranslateAnimation(xAbs, xSlidingPiece, 0, 0);
+		else
+			slide = new TranslateAnimation(xSlidingPiece, xAbs, 0, 0);
+		//slide.setInterpolator(new BounceInterpolator());
+		slide.setDuration(GameUtils.ANIMATION_FALLING_TIME/3);
+		slide.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub
+				thisView.invalidate();
+				
+			}
+		});
+		
+		thisView.startAnimation(slide);
+		mDropAreaView.onMove(dx, 0);
+		*/
+//		final int offset = total/ 10;
+//		new Thread(new Runnable() {
+//			public void run() {
+//				mDropAreaView.post(new Runnable() {
+//					public void run() {
+//						int x = 0;
+//						mDropAreaView.onMove(offset + x, 0);
+//						x += offset;
+//					}
+//				});
+//			}
+//		}).start();
+
+		/*
+		 * boolean post = mDropAreaView.post(new Runnable() { public void run()
+		 * { mDropAreaView.onMove(dx, 0); } });
+		 */
 	}
 
 	@Override
