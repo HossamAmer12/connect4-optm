@@ -22,7 +22,6 @@ public class BoardView extends GridView implements
 	private Listener mListener;
 	int nRows;
 	int nCols;
-	private LayoutInflater mInflater;
 	private Resources mResources;
 
 	// 2D array of piece Views
@@ -92,9 +91,6 @@ public class BoardView extends GridView implements
 		// Inflate the board_View
 		mResources = this.getContext().getApplicationContext().getResources();
 
-		mInflater = (LayoutInflater) (getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
-
 		mPieceType = PieceType.Player1;
 
 		newPieceBitmap = BitmapFactory.decodeResource(mResources,
@@ -112,9 +108,6 @@ public class BoardView extends GridView implements
 
 		// Inflate the board_View
 		mResources = this.getContext().getApplicationContext().getResources();
-
-		mInflater = (LayoutInflater) (getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
 
 		// Init Engine
 		mEngine = new ConnectFourEngine(Connect4Activity.nRows,
@@ -172,47 +165,6 @@ public class BoardView extends GridView implements
 	protected void onFinishInflate() {
 		// TODO Auto-generated method stub
 		super.onFinishInflate();
-
-	}
-
-	// public synchronized void addPiece(int positionToAnimate, int dy) {
-	public void animatePiece(int positionToAnimate, int dy) {
-
-		int dx = 0;
-		final View thisView = this;// this view
-		TranslateAnimation slide = new TranslateAnimation(0, dx, 0, dy);
-
-		slide.setInterpolator(new BounceInterpolator());
-		slide.setDuration(1200);
-		slide.setAnimationListener(new AnimationManager(positionToAnimate, dy,
-				this));
-		/*
-		 * slide.setAnimationListener(new Animation.AnimationListener() { public
-		 * void onAnimationStart(Animation anim) { animationStarted();
-		 * System.out.println("Animation Start ");
-		 * 
-		 * }
-		 * 
-		 * public void onAnimationRepeat(Animation anim) {
-		 * 
-		 * }
-		 * 
-		 * public void onAnimationEnd(Animation anim) {
-		 * thisView.postInvalidate(); animationEnded();
-		 * 
-		 * System.out.println("Animation End ");
-		 * 
-		 * // Toast.makeText(getContext(), "Test End", //
-		 * Toast.LENGTH_SHORT).show(); // dropped(); }
-		 * 
-		 * });
-		 */
-		Log.v("Board View ", " Childeren size" + this.getChildCount());
-		Log.v("Board View ", " Dy inside view " + dy);
-		Log.v("Board View ", " positionToAnimate inside view "
-				+ positionToAnimate);
-
-		this.getChildAt(positionToAnimate).startAnimation(slide);
 
 	}
 

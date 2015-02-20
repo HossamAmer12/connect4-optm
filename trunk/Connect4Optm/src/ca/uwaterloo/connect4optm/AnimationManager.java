@@ -28,14 +28,8 @@ public class AnimationManager implements Animation.AnimationListener {
 
 	@Override
 	public void onAnimationStart(Animation animation) {
-		// TODO Auto-generated method stub
-		// mBoardView.animationStarted(this.posAnim, this.dy);
-
-		// mBoardView.animationStarted(this.posAnim, this.dy, this.posDest,
-		// this.xInitial);
 
 		// Disable board
-		// mBoardView.isBoardEnabled = false;
 		mBoardView.setBoardEnabled(false);
 		mBoardView.animationStarted(this.posAnim);
 
@@ -49,7 +43,6 @@ public class AnimationManager implements Animation.AnimationListener {
 
 		// Enable board
 		mBoardView.setBoardEnabled(true);
-		// mBoardView.isBoardEnabled = true;
 
 	}
 
