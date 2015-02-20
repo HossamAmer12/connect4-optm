@@ -213,9 +213,11 @@ public class Connect4Activity extends ActionBarActivity implements
 			return;
 
 		// Align with column!
+		/*
 		if (Math.abs(mDropAreaView.getBallRect().left
 				- mBoard.getChildAt(posSrc).getLeft()) > 15)
 			return;
+		*/
 
 		int dy = mBoard.getChildAt(posDest).getTop();
 		int posAnim = mBoardGridAdapter.getLinearPosition(xInitial, 0);
