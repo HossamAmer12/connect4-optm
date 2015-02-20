@@ -8,7 +8,7 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 	BoardViewAdapter mBoardViewAdapter;
 	Context mContext;
 	DropAreaView mDropAreaView;
-	static boolean turn = false;
+	static boolean isPlayed = false;
 
 	public OnPieceDroppedListener(BoardView mBoardView,
 			BoardViewAdapter mBoardViewAdapter, Context mContext,
@@ -42,17 +42,21 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 
 			
 			// Check win!
-			if(checkWin())
+			if(mBoardView.checkWin())
 				return;
 			
-
+			
 			
 			// Check the turn and computer player!
-//			if(mBoardView.mComputerEnabled)
-			if (!turn)
+			// computer player is 2nd
+//			if(mBoardView.mComputerEnabled && mBoardView.player1_goFst == 0)
+//			if (!turn)
+//			if(!mBoardView.isComputerPlayed() && mBoardView.isComputer() && !mBoardView.isComputerFirst() )
+			if(!mBoardView.isComputerPlayed() && mBoardView.isComputer())
 			{
-				playComputer();
-				turn = true;
+				mBoardView.playComputer();				
+//				mBoardView.setComputerPlayed(true);
+//				mBoardView.isComputerPlayed = true;
 			}
 		
 	
@@ -67,13 +71,9 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 		}
 	}
 	
-	private boolean checkWin()
-	{
-		System.out.println("OnPieceDropped: CheckWin!");
-		// TODO:
-		return false;
-	}
+	
 
+	/*
 	private void playComputer() {
 
 		System.out.println("OnPieceDropped: Computer Move!");
@@ -89,5 +89,6 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 		mBoardView.animatePiece(posAnim, dy, posDest, xInitial);		
 
 	}
+	*/
 
 }
