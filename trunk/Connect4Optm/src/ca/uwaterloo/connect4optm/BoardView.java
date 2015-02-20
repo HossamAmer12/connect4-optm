@@ -34,7 +34,10 @@ public class BoardView extends GridView implements
 	int mAlgorithm;
 	int playersNumber; // number of players (0: computer, 2 players otherwise)
 	int player1_goFst; // 0 player 1 goes first, 1 player 2 goes first
-	boolean mComputerEnabled;
+//	boolean mComputerEnabled;
+//	boolean isComputerFirst;
+	
+	boolean isComputerPlayed;
 
 	// OnPieceDroppedListener
 	private OnPieceDropped onPieceDropped;
@@ -261,6 +264,17 @@ public class BoardView extends GridView implements
 		}
 	}
 
+	
+	public boolean isComputer()
+	{
+		return playersNumber == 0;
+	}
+	
+	public boolean isComputerFirst()
+	{
+		return player1_goFst != 0;
+	}
+	
 	public int getmDifficultyLevel() {
 		return mDifficultyLevel;
 	}
@@ -286,9 +300,6 @@ public class BoardView extends GridView implements
 	}
 
 	public int getPlayer1_goFst() {
-
-		// Setting of mComputerEnabled
-		mComputerEnabled = playersNumber == 0;
 
 		return player1_goFst;
 	}
@@ -335,6 +346,42 @@ public class BoardView extends GridView implements
 
 	public void setBoardEnabled(boolean isBoardEnabled) {
 		this.isBoardEnabled = isBoardEnabled;
+	}
+	
+	
+//	public int playComputer() {
+	public void playComputer() {
+
+		System.out.println("OnPieceDropped: Computer Move!");
+		
+		// Get the Engine position
+//		int tmp = mBoardView.mEngine.NextMoveHint_MC_Scoring(GameUtils.NUMBER_OF_PATHS);
+		
+		int dx = 0;
+		int posAnim = 0;
+		int posDest = 35;
+		int xInitial = 0;
+		int dy = this.getChildAt(posDest).getTop();
+
+		this.animatePiece(posAnim, dy, posDest, xInitial);	
+		
+		this.setComputerPlayed(true);
+
+	}
+	
+	public boolean checkWin()
+	{
+		System.out.println("OnPieceDropped: CheckWin!");
+		// TODO:
+		return false;
+	}
+
+	public boolean isComputerPlayed() {
+		return isComputerPlayed;
+	}
+
+	public void setComputerPlayed(boolean isComputerPlayed) {
+		this.isComputerPlayed = isComputerPlayed;
 	}
 
 }

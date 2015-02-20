@@ -136,6 +136,8 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		storeAbsolutePositions();
 
+		newGame();
+
 		// Change the bottom position of the droparea view
 		// int[] location = new int[2];
 		// mBoard.getChildAt(0).getLocationOnScreen(location);
@@ -143,6 +145,25 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// yAbs = mBoard.getChildAt(0).getTop();
 		// mDropAreaView.setBottomPos(yAbs);
+
+	}
+
+	private void newGame() {
+
+		// Computer First turn
+		if (mBoard.isComputer() && mBoard.isComputerFirst()) {
+//			int dx = mBoard.playComputer();
+			mBoard.playComputer();
+
+			PieceType newPieceType;
+			if (mBoard.mPieceType == PieceType.Player1)
+				newPieceType = PieceType.Player2;
+			else
+				newPieceType = PieceType.Player1;
+			
+			mDropAreaView.togglePieceColor(newPieceType);
+
+		}
 
 	}
 
@@ -212,14 +233,17 @@ public class Connect4Activity extends ActionBarActivity implements
 			return;
 
 		// Align with column!
-//		if (Math.abs(mDropAreaView.getBallRect().left
-//				- mBoard.getChildAt(posSrc).getLeft()) > 15)
-//			return;
+		// if (Math.abs(mDropAreaView.getBallRect().left
+		// - mBoard.getChildAt(posSrc).getLeft()) > 15)
+		// return;
 
 		// Move the sliding piece automatically
 		onHintButton(xDest, yDest);
 
-		
+		// Reset the computer played flag for the computer next play
+//		if (!mBoard.isComputerFirst() && mBoard.isComputer())
+		if (mBoard.isComputer())
+			mBoard.setComputerPlayed(false);
 
 		// Align with column!
 		/*
