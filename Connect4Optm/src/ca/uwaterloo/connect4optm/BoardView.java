@@ -34,9 +34,9 @@ public class BoardView extends GridView implements
 	int mAlgorithm;
 	int playersNumber; // number of players (0: computer, 2 players otherwise)
 	int player1_goFst; // 0 player 1 goes first, 1 player 2 goes first
-//	boolean mComputerEnabled;
-//	boolean isComputerFirst;
-	
+	// boolean mComputerEnabled;
+	// boolean isComputerFirst;
+
 	boolean isComputerPlayed;
 
 	// OnPieceDroppedListener
@@ -264,17 +264,14 @@ public class BoardView extends GridView implements
 		}
 	}
 
-	
-	public boolean isComputer()
-	{
+	public boolean isComputer() {
 		return playersNumber == 0;
 	}
-	
-	public boolean isComputerFirst()
-	{
+
+	public boolean isComputerFirst() {
 		return player1_goFst != 0;
 	}
-	
+
 	public int getmDifficultyLevel() {
 		return mDifficultyLevel;
 	}
@@ -347,35 +344,32 @@ public class BoardView extends GridView implements
 	public void setBoardEnabled(boolean isBoardEnabled) {
 		this.isBoardEnabled = isBoardEnabled;
 	}
-	
-	
-//	public int playComputer() {
+
+	// public int playComputer() {
 	public void playComputer() {
 
 		System.out.println("OnPieceDropped: Computer Move!");
-		
+
 		// Get the Engine position
-		this.mEngine.nextMoveHint_Android(this.mAlgorithm, this.mDifficultyLevel);
-		
+		this.mEngine.nextMoveHint_Android(this.mAlgorithm,
+				this.mDifficultyLevel);
+
 		int dx = 0;
 		int posAnim = this.mEngine.getPosAnim();
 		int posDest = this.mEngine.getPosDest();
 		int xInitial = this.mEngine.getxInitial();
-		
-		//this.mEngine.PlayerMove(xInitial);
-		
-		int dy = this.getChildAt(posDest).getTop();
 
-		this.animatePiece(posAnim, dy, posDest, xInitial);	
-		
+		// this.mEngine.PlayerMove(xInitial);
+
+		int dy = this.getChildAt(posDest).getTop();
+		this.animatePiece(posAnim, dy, posDest, xInitial);
 		this.setComputerPlayed(true);
 
 	}
-	
-	public int checkWin()
-	{
-		
-		//System.out.println("OnPieceDropped: CheckWin!");
+
+	public int checkWin() {
+
+		// System.out.println("OnPieceDropped: CheckWin!");
 		// TODO:
 		return this.mEngine.CheckWin();
 	}
