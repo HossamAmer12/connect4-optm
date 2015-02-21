@@ -165,6 +165,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Alg2" />
+                    
+                     <RadioButton
+                        android:id="@+id/radio_alg2"
+                        style="@style/MyRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Alg3" />
+                     
                 </RadioGroup>
 
                 <RadioGroup

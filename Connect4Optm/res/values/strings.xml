@@ -20,6 +20,7 @@
     <string name="Size3">Board size (7x10)</string>
     <string name="Alg1">Minimax Algorithm</string>
     <string name="Alg2">Montecarlo Algorithm</string>
+    <string name="Alg3">Greedy Algorithm</string>
     <string name="level1">Easy</string>
     <string name="level2">Meduim</string>
     <string name="level3">Hard</string>
