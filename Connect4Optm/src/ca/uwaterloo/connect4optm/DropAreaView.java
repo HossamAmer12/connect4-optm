@@ -27,8 +27,8 @@ public class DropAreaView extends View {
 	private static String TAG = "DropAreaView";
 	private boolean post;
 	private int mBallSize;
-	
-	// public 
+
+	// public
 	public int bottomPos;
 	public int topPos;
 
@@ -150,14 +150,14 @@ public class DropAreaView extends View {
 		// mCanvasHeight);
 
 		// mBallRect.set(2, 0, mBallSize, mBallSize);
-		
+
 		// Working!
-		mBallRect.set(0, 0 , mBallSize, mBallSize );
-		
-//		mBallRect.set(0, 0 , mBallSize, bottomPos );
-		
-//		mBallRect.set(0, 0 + 195, mBallSize, mBallSize + 195);
-		
+		mBallRect.set(0, 0, mBallSize, mBallSize);
+
+		// mBallRect.set(0, 0 , mBallSize, bottomPos );
+
+		// mBallRect.set(0, 0 + 195, mBallSize, mBallSize + 195);
+
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public class DropAreaView extends View {
 
 		// Working!
 		mBallRect.set(iX, 0, mBallSize, mBallSize);
-//		mBallRect.set(iX, 0, mBallSize, bottomPos);
+		// mBallRect.set(iX, 0, mBallSize, bottomPos);
 		invalidate();
 	}
 
@@ -224,4 +224,26 @@ public class DropAreaView extends View {
 		this.topPos = topPos;
 	}
 
+	public void onHintButton(int x, int y, int xAbs) {
+		
+		// Move the sliding piece to that position
+		int xSlidingPiece = this.getBallRect().left;
+
+		int dx = xAbs - xSlidingPiece;
+
+		Log.v("Main Activity ", "xAbs: " + xAbs);
+		Log.v("Main Activity ", "xSlidingPiece: " + xSlidingPiece);
+		Log.v("Main Activity ", "dx: " + dx);
+		Log.v("Main Activity ", "Window width : " + GameUtils.mScreenWidth);
+
+		this.onMove(dx, 0);
+
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		mBallRect.set(0, 0, mBallSize, mBallSize);
+		this.invalidate();
+		
+	}
 }

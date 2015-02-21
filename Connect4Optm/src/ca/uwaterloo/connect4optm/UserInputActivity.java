@@ -215,10 +215,14 @@ public class UserInputActivity extends ActionBarActivity implements
 	private void init() {
 		playButton = (Button) (this.findViewById(R.id.play_button));
 		playButton.setOnClickListener(this);
+		
+		/*
 		setButton = (Button) (this.findViewById(R.id.open_settings));
 		setButton.setOnClickListener(this);
 		helpButton = (Button) (this.findViewById(R.id.open_help));
 		helpButton.setOnClickListener(this);
+		*/
+		
 		diffGroup = (RadioGroup) findViewById(R.id.radio_diff);
 		playGroup = (RadioGroup) findViewById(R.id.radio_play);
 		turnGroup = (RadioGroup) findViewById(R.id.radio_turn);
@@ -278,6 +282,13 @@ public class UserInputActivity extends ActionBarActivity implements
 
 	@Override
 	public void onClick(View v) {
+		if (v.getId() == R.id.play_button) {
+			store();
+			Intent intent = new Intent(getBaseContext(), Connect4Activity.class);
+			 this.startActivity(intent);
+		}
+		
+		/*
 		if (v.getId() == R.id.open_settings) {
 			// Intent intent = new Intent(this, SettingsActivity.class);
 			// startActivity(intent);
@@ -291,7 +302,7 @@ public class UserInputActivity extends ActionBarActivity implements
 			// Intent intent = new Intent(this, HelpActivity.class);
 			// this.startActivity(intent);
 		}
-
+	*/
 	}
 
 	private void showTurn() {

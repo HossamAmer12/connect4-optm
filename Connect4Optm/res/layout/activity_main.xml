@@ -4,10 +4,10 @@
     android:layout_height="fill_parent" >
 
     <ImageView
-        android:contentDescription="@string/desc"
         android:id="@+id/background_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:contentDescription="@string/desc"
         android:scaleType="fitXY"
         android:src="@drawable/wood" />
 
@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/Alg2" />
                 </RadioGroup>
-                
+
                 <RadioGroup
                     android:id="@+id/radio_size"
                     android:layout_width="wrap_content"
@@ -189,15 +189,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Size2" />
-                    
-                      <RadioButton
+
+                    <RadioButton
                         android:id="@+id/radio_size2"
                         style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Size3" />
                 </RadioGroup>
-                
             </LinearLayout>
         </LinearLayout>
 
@@ -217,8 +216,9 @@
                 android:background="@drawable/greenbutton"
                 android:maxWidth="400dp"
                 android:minWidth="200dp"
-                android:text="Play" />
+                android:text="@string/play" />
 
+            <!--
             <Button
                 android:id="@+id/open_settings"
                 style="@style/MyButton"
@@ -238,6 +238,8 @@
                 android:maxWidth="400dp"
                 android:minWidth="200dp"
                 android:text="Help" />
+            -->
+
         </LinearLayout>
     </LinearLayout>
 

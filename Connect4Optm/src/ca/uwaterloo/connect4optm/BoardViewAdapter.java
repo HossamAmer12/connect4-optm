@@ -1,6 +1,8 @@
 package ca.uwaterloo.connect4optm;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Context;
@@ -82,13 +84,13 @@ public class BoardViewAdapter extends ArrayAdapter<Piece> {
 
 		Bitmap emptyPiece = BitmapFactory.decodeResource(mResources,
 				R.drawable.empty);
-		
-		
+
 		// Fix size bug of Gridview
 		double scaleFactor = 1.1;
-		emptyPiece = Bitmap.createScaledBitmap(emptyPiece, (int) (emptyPiece.getWidth()*scaleFactor),
-				(int) (emptyPiece.getWidth()*scaleFactor), true);
-		
+		emptyPiece = Bitmap.createScaledBitmap(emptyPiece,
+				(int) (emptyPiece.getWidth() * scaleFactor),
+				(int) (emptyPiece.getWidth() * scaleFactor), true);
+
 		int pos = this.nRows * this.nCols - 1;
 		for (int y = nRows - 1; y >= 0; y--) {
 
@@ -106,6 +108,27 @@ public class BoardViewAdapter extends ArrayAdapter<Piece> {
 
 		}
 
+		this.notifyDataSetChanged();
+
+	}
+
+	public void resetPieces() {
+
+		Bitmap emptyPiece = BitmapFactory.decodeResource(mResources,
+				R.drawable.empty);
+
+		// Fix size bug of Gridview
+		double scaleFactor = 1.1;
+		emptyPiece = Bitmap.createScaledBitmap(emptyPiece,
+				(int) (emptyPiece.getWidth() * scaleFactor),
+				(int) (emptyPiece.getWidth() * scaleFactor), true);
+
+		for (int i = 0; i < this.getCount(); i++) {
+			this.pieces.get(i).setImage(emptyPiece);
+
+		}
+		
+		Arrays.fill(this.mTopArray, 0);
 		this.notifyDataSetChanged();
 
 	}
@@ -134,9 +157,9 @@ public class BoardViewAdapter extends ArrayAdapter<Piece> {
 
 		// width = diamter;
 		// height = diamter;
-		
-//		width = this.pieces.get(0).getyPos() + 50;
-//		height = width + 50;
+
+		// width = this.pieces.get(0).getyPos() + 50;
+		// height = width + 50;
 
 		newPieceBitmap = Bitmap.createScaledBitmap(newPieceBitmap, width,
 				height, true);

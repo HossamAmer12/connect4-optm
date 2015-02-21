@@ -382,8 +382,31 @@ public class BoardView extends GridView implements
 		this.isComputerPlayed = isComputerPlayed;
 	}
 
-}
+	/**
+	 * Restart action
+	 */
+	public void reset() {
+		
+		this.isComputerPlayed = false;
+		this.isBoardEnabled = true;
+		this.setEnabled(true);
+//		this.init(this.nRows, this.nCols);
+		newGame();
+		
+		// Reset the Engine
+		// this.mEngine.reset();
+	}
 
+	public void newGame() {
+		// Computer First turn
+		if (this.isComputer() && this.isComputerFirst()) {
+			this.playComputer();
+
+		}
+		
+	}
+
+}
 // new Thread(new Runnable() {
 // public void run() {
 // try {

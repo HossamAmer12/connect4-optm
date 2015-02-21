@@ -6,33 +6,40 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import ca.uwaterloo.connect4optm.GameUtils.PieceType;
 
 public class Connect4Activity extends ActionBarActivity implements
-		OnItemClickListener, IOnExitListener {
+		OnItemClickListener, OnClickListener {
 
 	BoardView mBoard;
 	BoardViewAdapter mBoardGridAdapter;
 
 	// Sliding piece
 	private DropAreaView mDropAreaView;
-
+	
+	
 	// 8x7, 9x7, 10x7, 8x8
 	public static int nCols = 7;// 7 columns --> Only changes the spaces between
 	public static int nRows = 6; // rows
+	
+	// Check Win textview
+	TextView mCheckWin;
+	
+	Button mHint;
+	Button mRestart;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,14 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		mDropAreaView = (DropAreaView) findViewById(R.id.sliding_piece);
 
+		// Find the check win Textview
+		mCheckWin = (TextView) findViewById(R.id.player_turn);
+		
+		// Find the bottom buttons
+		LinearLayout container = (LinearLayout) findViewById(R.id.game_btns);
+		mRestart = (Button) container.findViewById(R.id.restart);
+		mHint  = (Button) container.findViewById(R.id.hint);
+		
 		// Register the listener
 		mBoard.setOnItemClickListener(this);
 
@@ -70,9 +85,17 @@ public class Connect4Activity extends ActionBarActivity implements
 				mBoardGridAdapter, getApplicationContext(), mDropAreaView));
 
 		// OnPieceDropped listener
-		mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
-				mBoardGridAdapter, getApplicationContext(), mDropAreaView));
+//		mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
+//				mBoardGridAdapter, getApplicationContext(), mDropAreaView));
 
+		// OnPieceDropped listener
+		mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
+				mBoardGridAdapter, getApplicationContext(), mDropAreaView, mCheckWin));
+		
+		mRestart.setOnClickListener(this);
+		mHint.setOnClickListener(this);
+	
+	
 	}
 
 	private void startGame() {
@@ -152,7 +175,7 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Computer First turn
 		if (mBoard.isComputer() && mBoard.isComputerFirst()) {
-//			int dx = mBoard.playComputer();
+			// int dx = mBoard.playComputer();
 			mBoard.playComputer();
 
 			PieceType newPieceType;
@@ -160,8 +183,8 @@ public class Connect4Activity extends ActionBarActivity implements
 				newPieceType = PieceType.Player2;
 			else
 				newPieceType = PieceType.Player1;
-			
-			mDropAreaView.togglePieceColor(newPieceType);
+
+//			mDropAreaView.togglePieceColor(newPieceType);
 
 		}
 
@@ -226,53 +249,26 @@ public class Connect4Activity extends ActionBarActivity implements
 		int xDest = click.getxIndex();
 		int yDest = Connect4Activity.nRows - top - 1;
 		int posDest = mBoardGridAdapter.getLinearPosition(xDest, yDest);
-		int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
+//		int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
 
 		// Avoid overfill
 		if (posDest < 0)
 			return;
 
-		// Align with column!
-		// if (Math.abs(mDropAreaView.getBallRect().left
-		// - mBoard.getChildAt(posSrc).getLeft()) > 15)
-		// return;
-
 		// Move the sliding piece automatically
 		onHintButton(xDest, yDest);
 
 		// Reset the computer played flag for the computer next play
-//		if (!mBoard.isComputerFirst() && mBoard.isComputer())
+		// if (!mBoard.isComputerFirst() && mBoard.isComputer())
 		if (mBoard.isComputer())
 			mBoard.setComputerPlayed(false);
 
-		// Align with column!
-		/*
-		 * if (Math.abs(mDropAreaView.getBallRect().left -
-		 * mBoard.getChildAt(posSrc).getLeft()) > 15) return;
-		 */
-
+	
 		int dy = mBoard.getChildAt(posDest).getTop();
 		int posAnim = mBoardGridAdapter.getLinearPosition(xInitial, 0);
 
-		PieceType newPieceType;
-
-		if (mBoard.mPieceType == PieceType.Player1)
-			newPieceType = PieceType.Player2;
-		else
-			newPieceType = PieceType.Player1;
-
 		mBoard.animatePiece(posAnim, dy, posDest, xInitial);
-		mDropAreaView.togglePieceColor(newPieceType);
 		
-
-
-		// mBoard.animatePiece(posAnim, dy);
-		// mBoardGridAdapter.updatePieces(posDest, mBoard.mPieceType,
-		// mBoard.newPieceBitmap);
-
-		// mBoard.playDropSound();
-		// mBoardGridAdapter.updateTopArray(xInitial);
-		// mBoard.togglePieceColor();
 
 	}
 
@@ -284,7 +280,8 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Move the sliding piece to that position
 		int xSlidingPiece = mDropAreaView.getBallRect().left;
-
+		
+		// Total distance
 		int dx = xAbs - xSlidingPiece;
 
 		Log.v("Main Activity ", "xAbs: " + xAbs);
@@ -294,56 +291,32 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		mDropAreaView.onMove(dx, 0);
 
-		/*
-		 * final int total = dx; final DropAreaView thisView = mDropAreaView;
-		 * 
-		 * 
-		 * TranslateAnimation slide; if(xAbs > xSlidingPiece) slide = new
-		 * TranslateAnimation(xAbs, xSlidingPiece, 0, 0); else slide = new
-		 * TranslateAnimation(xSlidingPiece, xAbs, 0, 0);
-		 * //slide.setInterpolator(new BounceInterpolator());
-		 * slide.setDuration(GameUtils.ANIMATION_FALLING_TIME/3);
-		 * slide.setAnimationListener(new AnimationListener() {
-		 * 
-		 * @Override public void onAnimationStart(Animation animation) { // TODO
-		 * Auto-generated method stub
-		 * 
-		 * }
-		 * 
-		 * @Override public void onAnimationRepeat(Animation animation) { //
-		 * TODO Auto-generated method stub
-		 * 
-		 * }
-		 * 
-		 * @Override public void onAnimationEnd(Animation animation) { // TODO
-		 * Auto-generated method stub thisView.invalidate();
-		 * 
-		 * } });
-		 * 
-		 * thisView.startAnimation(slide); mDropAreaView.onMove(dx, 0);
-		 */
-		// final int offset = total/ 10;
-		// new Thread(new Runnable() {
-		// public void run() {
-		// mDropAreaView.post(new Runnable() {
-		// public void run() {
-		// int x = 0;
-		// mDropAreaView.onMove(offset + x, 0);
-		// x += offset;
-		// }
-		// });
-		// }
-		// }).start();
-
-		/*
-		 * boolean post = mDropAreaView.post(new Runnable() { public void run()
-		 * { mDropAreaView.onMove(dx, 0); } });
-		 */
 	}
 
 	@Override
-	public void exit() {
-		finish();
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.restart:
+			mBoardGridAdapter.resetPieces();
+			mBoard.reset();
+			mCheckWin.setText("");
+			mDropAreaView.reset();
+			break;
+			
+		case R.id.hint:			
+			int xDest = 2;
+			int yDest = 0;
+			onHintButton(xDest, yDest);
+			break;
+
+		default:
+			break;
+		}
+		
+		
 	}
+
+
 
 }
