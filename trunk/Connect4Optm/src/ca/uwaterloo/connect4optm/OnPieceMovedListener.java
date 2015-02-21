@@ -28,7 +28,11 @@ public class OnPieceMovedListener implements OnPieceMoved {
 	public void onMoved(boolean moved, int posAnim) {
 
 		if (moved) {
-
+			
+			
+			// Toggle DropView!
+			toggleDropView();
+			
 			// Save source pieceType
 			PieceType srcPieceType = mBoardViewAdapter.getItem(posAnim)
 					.getPieceType();
@@ -52,6 +56,16 @@ public class OnPieceMovedListener implements OnPieceMoved {
 			// mBoardViewAdapter.updatePieces(0, PieceType.Player1, emptyPiece);
 
 		}
+	}
+	
+	public void toggleDropView()
+	{
+		PieceType newPieceType;
+		if (mBoardView.mPieceType == PieceType.Player1)
+			newPieceType = PieceType.Player2;
+		else
+			newPieceType = PieceType.Player1;
+		mDropAreaView.togglePieceColor(newPieceType);
 	}
 
 }
