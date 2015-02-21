@@ -59,12 +59,44 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 			if (mBoardView.checkWin() != 0) {
 				System.out
 						.println("Player: " + mBoardView.checkWin() + " won!");
-				
+
 				mCheckWin.setText("Player " + mBoardView.checkWin() + " won!");
+
+				if (mBoardView.checkWin() == 1) {
+
+					if (mBoardView.isComputer()) {
+
+						if (mBoardView.isComputerFirst())
+							mBoardView.playFailSound();
+						else
+							mBoardView.playSuccessSound();
+					} else
+						mBoardView.playSuccessSound();
+
+				} else {
+					if (mBoardView.isComputer()) {
+						if (mBoardView.isComputerFirst())
+							mBoardView.playSuccessSound();
+						else
+							mBoardView.playFailSound();
+					} else
+						mBoardView.playSuccessSound();
+				}
+
 				mBoardView.setEnabled(false);
-				
+				// Stop!
 				return;
+			} 
+			/*//XXXXXX BUG
+			else if (mBoardView.checkWin() == 0) {
+				mCheckWin.setText("A Tie! :=)");
+				mBoardView.setEnabled(false);
+
+				// Stop!
+				return;
+
 			}
+			*/
 
 			// Check the turn and computer player!
 			// computer player is 2nd
@@ -88,7 +120,6 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 
 		}
 	}
-
 	/*
 	 * private void playComputer() {
 	 * 

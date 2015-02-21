@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -221,7 +220,15 @@ public class BoardView extends GridView implements
 	public void setOnPieceMovedListener(OnPieceMoved listener) {
 		this.onPieceMoved = listener;
 	}
-
+	
+	public void playSuccessSound(){
+		playSound(R.raw.chime1);
+	}
+	
+	public void playFailSound(){
+		playSound(R.raw.chime2);
+	}
+	
 	public void playDropSound() {
 		playSound(R.raw.drop);
 	}
