@@ -25,7 +25,7 @@ public class UserInputActivity extends ActionBarActivity implements
 	private RadioButton play0, play1;
 	private RadioButton turn0, turn1;
 	private RadioGroup algGroup;
-	private RadioButton alg0, alg1;
+	private RadioButton alg0, alg1, alg2;
 	private RadioGroup szGroup;
 	private RadioButton size0, size1, size2;
 
@@ -126,9 +126,11 @@ public class UserInputActivity extends ActionBarActivity implements
 	private void setAlgorithm(int i) {
 		if (i == 0) {
 			alg0.setChecked(true);
-		} else {
+		} else if(i == 1){
 			alg1.setChecked(true);
 		}
+		else
+			alg2.setChecked(true);
 
 	}
 
@@ -239,6 +241,7 @@ public class UserInputActivity extends ActionBarActivity implements
 		algGroup = (RadioGroup) findViewById(R.id.radio_alg);
 		alg0 = (RadioButton) findViewById(R.id.radio_alg0);
 		alg1 = (RadioButton) findViewById(R.id.radio_alg1);
+		alg2 = (RadioButton) findViewById(R.id.radio_alg2);
 
 		szGroup = (RadioGroup) findViewById(R.id.radio_size);
 		size0 = (RadioButton) findViewById(R.id.radio_size0);
@@ -321,6 +324,7 @@ public class UserInputActivity extends ActionBarActivity implements
 		algGroup.setEnabled(show);
 		alg0.setEnabled(show);
 		alg1.setEnabled(show);
+		alg2.setEnabled(show);
 
 		// Two player game
 		if (!show) {
