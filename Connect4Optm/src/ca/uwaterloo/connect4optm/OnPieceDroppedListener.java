@@ -87,8 +87,8 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 				// Stop!
 				return;
 			} 
-			/*//XXXXXX BUG
-			else if (mBoardView.checkWin() == 0) {
+			//XXXXXX BUG
+			else if (mBoardView.checkWin() == 0 && mBoardView.isFull()) {
 				mCheckWin.setText("A Tie! :=)");
 				mBoardView.setEnabled(false);
 
@@ -96,7 +96,7 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 				return;
 
 			}
-			*/
+			
 
 			// Check the turn and computer player!
 			// computer player is 2nd
