@@ -412,6 +412,11 @@ public class BoardView extends GridView implements
 		}
 		
 	}
+	
+	public boolean isFull()
+	{
+		return this.mEngine.CheckFullBoard();
+	}
 
 }
 // new Thread(new Runnable() {
