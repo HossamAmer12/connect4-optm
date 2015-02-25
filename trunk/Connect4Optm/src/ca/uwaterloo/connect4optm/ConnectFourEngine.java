@@ -344,8 +344,8 @@ public class ConnectFourEngine {
 		return Result;
 	}
 	
-	private float getScore_cum(int position, int player) {
-		float Result = 0;
+	private int getScore_cum(int position, int player) {
+		int Result = 0;
 		int i;
 
 		Scoringfn_cum(TopPositions[position] + 1, position, player);
@@ -701,13 +701,15 @@ public class ConnectFourEngine {
 		return BestMove;
 	}
 
-	/*public int NextMoveHint_MC_Scoring_Limited(int NumberOfPaths, int depth) {
+	/*public int NextMoveHint_MC_Scoring_Depth(int NumberOfPaths, int depth) {
 
 		int BestMove = -1;
 		float NumberOfWins[] = new float[m];
+		float cum_score[] = new float[m];
+		int iTrials[]= new int[m];
 
 		int NumSteps;
-		int icolumn, iTrials;
+		int icolumn;
 		Random rand = new Random();
 		int RandMove;
 		int i;
@@ -717,12 +719,21 @@ public class ConnectFourEngine {
 		int[] numsToGenerate = new int[m];
 		double[] discreteProbabilities = new double[m];
 
+		/*
 		for (i = 0; i < m; i++) {
 			numsToGenerate[i] = i;
 		}
-
+		*/
+		
+		for (icolumn = 0; icolumn < m; icolumn++) {
+			if (CheckValidMove(icolumn)) {
+				iTrials[icolumn]=getScore_cum(icolumn, Player_Turn);
+			}
+		}
+		
 		for (icolumn = 0; icolumn < m; icolumn++) {
 			NumberOfWins[icolumn] = 0;
+			cum_score[icolumn] = 0;
 			if (CheckValidMove(icolumn)) {
 
 				for (iTrials = 0; iTrials < NumberOfPaths; iTrials++) {
@@ -796,8 +807,10 @@ public class ConnectFourEngine {
 					CopyRestoreBoard(0, 1);
 				}
 
-			} else {
+			} 
+			else {
 				NumberOfWins[icolumn] = Integer.MIN_VALUE;
+				cum_score[icolumn] = Integer.MIN_VALUE; // Mosh moktane3 mmkn netala3ha mn el loop 2oddam 2na ra2y kda
 			}
 
 		}
@@ -816,7 +829,6 @@ public class ConnectFourEngine {
 		}
 		return BestMove;
 	}
-	
 	*/
 	/*
 	 * private class Node{ Node Parent; ArrayList<Node> Children; public Node(){
