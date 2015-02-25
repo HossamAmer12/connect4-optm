@@ -343,7 +343,19 @@ public class ConnectFourEngine {
 		}
 		return Result;
 	}
+	
+	private float getScore_cum(int position, int player) {
+		float Result = 0;
+		int i;
 
+		Scoringfn_cum(TopPositions[position] + 1, position, player);
+
+		for (i = 0; i < NumberOfConnectedDisks; i++) {
+			Result += (Constants[0][i] * PNumbers[player - 1][i]) - (Constants[1][i] * PNumbers[player_inv(player) - 1][i]);
+		}
+		return Result;
+	}
+	
 	public int CheckWin() {
 		int Result = 0;
 		int Connected = 0;
