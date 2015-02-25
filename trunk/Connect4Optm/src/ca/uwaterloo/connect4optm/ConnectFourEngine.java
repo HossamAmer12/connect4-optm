@@ -635,8 +635,7 @@ public class ConnectFourEngine {
 									Min = getMinValue(discreteProbabilities);
 									for (i = 0; i < m; i++) {
 										if (CheckValidMove(i))
-											discreteProbabilities[i] = discreteProbabilities[i]
-													+ Min + 1;
+											discreteProbabilities[i] = discreteProbabilities[i] - Min + 1;
 									}
 
 									double Sum = getSumValue(discreteProbabilities);
@@ -690,6 +689,123 @@ public class ConnectFourEngine {
 		return BestMove;
 	}
 
+	/*public int NextMoveHint_MC_Scoring_Limited(int NumberOfPaths, int depth) {
+
+		int BestMove = -1;
+		float NumberOfWins[] = new float[m];
+
+		int NumSteps;
+		int icolumn, iTrials;
+		Random rand = new Random();
+		int RandMove;
+		int i;
+		int WinMove = -1;
+		double Min;
+		float Score;
+		int[] numsToGenerate = new int[m];
+		double[] discreteProbabilities = new double[m];
+
+		for (i = 0; i < m; i++) {
+			numsToGenerate[i] = i;
+		}
+
+		for (icolumn = 0; icolumn < m; icolumn++) {
+			NumberOfWins[icolumn] = 0;
+			if (CheckValidMove(icolumn)) {
+
+				for (iTrials = 0; iTrials < NumberOfPaths; iTrials++) {
+					CopyRestoreBoard(1, 0);
+					NumSteps = 0;
+					PlayerMove(icolumn);
+
+					while (CheckWin() == 0) {
+						if (CheckFullBoard()) {
+							break;
+						} 
+						else 
+						{
+							WinMove = -1;
+							for (i = 0; i < m; i++) {
+
+								if (CheckValidMove(i)) {
+									int lastMoveCopy = latest_move;
+									latest_move = i;
+									TopPositions[i]++;
+									Board[TopPositions[i]][i] = Player_Turn;
+									if (CheckWin() == Player_Turn) {
+										WinMove = i;
+										Board[TopPositions[i]][i] = 0;
+										TopPositions[i]--;
+										break;
+									}
+									Board[TopPositions[i]][i] = 0;
+									TopPositions[i]--;
+									latest_move = lastMoveCopy;
+								}
+							}
+
+							if (WinMove == -1)
+								do {
+									Arrays.fill(discreteProbabilities, 0);
+									for (i = 0; i < m && CheckValidMove(i); i++)
+										discreteProbabilities[i] = getScore(i,
+												Player_Turn);
+
+									Min = getMinValue(discreteProbabilities);
+									for (i = 0; i < m; i++) {
+										if (CheckValidMove(i))
+											discreteProbabilities[i] = discreteProbabilities[i] - Min + 1;
+									}
+
+									double Sum = getSumValue(discreteProbabilities);
+
+									for (i = 0; i < m && CheckValidMove(i); i++) {
+										if (CheckValidMove(i))
+											discreteProbabilities[i] = discreteProbabilities[i] / Sum;
+									}
+
+									EnumeratedIntegerDistribution distribution = new EnumeratedIntegerDistribution(numsToGenerate,discreteProbabilities);
+									RandMove = distribution.sample();
+								} while (!CheckValidMove(RandMove));
+							else
+								RandMove = WinMove;
+
+							PlayerMove(RandMove);
+						}
+						NumSteps++;
+					}
+
+					if (CheckWin() == CopyPlayer_Turn) {
+						NumberOfWins[icolumn] += 1 / (float) NumSteps;
+					} else {
+						NumberOfWins[icolumn] += -1 / (float) NumSteps;
+					}
+					// print_board();
+					CopyRestoreBoard(0, 1);
+				}
+
+			} else {
+				NumberOfWins[icolumn] = Integer.MIN_VALUE;
+			}
+
+		}
+		float MaxNumberOfWins = -Float.MAX_VALUE;
+		BestMove = -1;
+		for (icolumn = 0; icolumn < m; icolumn++) {
+			if (CheckValidMove(icolumn)) {
+				if (NumberOfWins[icolumn] > MaxNumberOfWins) {
+					BestMove = icolumn;
+					MaxNumberOfWins = NumberOfWins[icolumn];
+				}
+			}
+		}
+		if (BestMove == -1) {
+			System.out.println("NoBestMove");
+		}
+		return BestMove;
+	}
+	
+	*/
 	/*
 	 * private class Node{ Node Parent; ArrayList<Node> Children; public Node(){
 	 * Children= new ArrayList<Node>(); } int Move; int Player; }
