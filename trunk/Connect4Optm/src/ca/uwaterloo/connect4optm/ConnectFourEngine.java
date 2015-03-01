@@ -1515,32 +1515,35 @@ public class ConnectFourEngine {
 		return Move;
 	}
 
-	 public void nextMoveHint_Android(int algorithmType, int difficultyLevel)
-	 { 
-		 // 0 minimax 
-		 // 1 Monte Carlo 
-		 if (algorithmType == 0) { 
-			 // Minimax int}}
-		 Move = 0;
-		 CopyRestoreBoard(1, 0); 
-		 Scoringfn_cum(TopPositions[latest_move],latest_move, (Player_Turn == 1) ? 2 : 1); 
-		 MiniMaxMove BestMove = MiniMax(Player_Turn, GameUtils.MINIMAX_DIFFICULTY_LEVEL[difficultyLevel], -Float.MAX_VALUE, Float.MAX_VALUE, 1); 
-		 Move = BestMove.BestMove;
-	  
-	  
-	  
-		 posAnim= Move; 
-		 posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
-		 System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+"Col:"+ Move); 
-		 xInitial= Move;
-		 Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
-	 
-		 CopyRestoreBoard(0, 1); 
-		 } else 
-		 {
-			 // Monte Carlo 
-			 } 
-		 }
+	public void nextMoveHint_Android(int algorithmType, int difficultyLevel) {
+        // 0 minimax
+        // 1 Monte Carlo
+        if (algorithmType == 0) {
+                // Minimax
+                int Move = 0;
+
+                CopyRestoreBoard(1, 0);
+                Scoringfn_cum(TopPositions[latest_move], latest_move,
+                                (Player_Turn == 1) ? 2 : 1);
+                MiniMaxMove BestMove = MiniMax(Player_Turn,
+                                GameUtils.MINIMAX_DIFFICULTY_LEVEL[difficultyLevel],
+                                -Float.MAX_VALUE, Float.MAX_VALUE, 1);
+                Move = BestMove.BestMove;
+               
+               
+               
+                posAnim= Move;
+                posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
+                System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+ "Col:"+ Move);
+                xInitial= Move;
+               
+                Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
+
+                CopyRestoreBoard(0, 1);
+        } else {
+                // Monte Carlo
+        }
+}
 	
 
 	public int getPosAnim() {
