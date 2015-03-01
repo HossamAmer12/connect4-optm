@@ -985,6 +985,7 @@ public class ConnectFourEngine {
 	public int NextMoveHint_MC_Scoring_Depth(int NumberOfPaths, int depth){
 	
 	int BestMove = -1;
+	int playernm;
 	float score[] = new float[m];
 	float cum_score[] = new float[m];
 	int iTrials[] = new int[m];
@@ -1009,6 +1010,7 @@ public class ConnectFourEngine {
 	double[] discreteProbabilities = new double[m];
 
 	
+	playernm=Player_Turn;
 	for (i = 0; i < m; i++) { 
 		numsToGenerate[i] = i; 
 	}
@@ -1132,7 +1134,8 @@ public class ConnectFourEngine {
 				 * }
 				 */
 				if (!(CheckFullBoard()))
-					score[icolumn] += score_cum_current;
+					for (int j = 0; j < NumberOfConnectedDisks; j++) 
+						score[icolumn] += ((Constants[0][j] * PNumbers[playernm - 1][j]) - (Constants[1][j] * PNumbers[player_inv(playernm) - 1][j]));
 				// print_board();
 				CopyRestoreBoard(0, 1);
 				restoreScore(SaveScore1);
@@ -1512,26 +1515,33 @@ public class ConnectFourEngine {
 		return Move;
 	}
 
-	/*
-	 * public void nextMoveHint_Android(int algorithmType, int difficultyLevel)
-	 * { // 0 minimax // 1 Monte Carlo if (algorithmType == 0) { // Minimax int
-	 * Move = 0;
-	 * 
-	 * CopyRestoreBoard(1, 0); Scoringfn_cum(TopPositions[latest_move],
-	 * latest_move, (Player_Turn == 1) ? 2 : 1); MiniMaxMove BestMove =
-	 * MiniMax(Player_Turn, GameUtils.MINIMAX_DIFFICULTY_LEVEL[difficultyLevel],
-	 * -Float.MAX_VALUE, Float.MAX_VALUE, 1); Move = BestMove.BestMove;
-	 * 
-	 * 
-	 * 
-	 * posAnim= Move; posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
-	 * System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+
-	 * "Col:"+ Move); xInitial= Move;
-	 * 
-	 * Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
-	 * 
-	 * CopyRestoreBoard(0, 1); } else { // Monte Carlo } }
-	 */
+	 public void nextMoveHint_Android(int algorithmType, int difficultyLevel)
+	 { 
+		 // 0 minimax 
+		 // 1 Monte Carlo 
+		 if (algorithmType == 0) { 
+			 // Minimax int}}
+		 Move = 0;
+		 CopyRestoreBoard(1, 0); 
+		 Scoringfn_cum(TopPositions[latest_move],latest_move, (Player_Turn == 1) ? 2 : 1); 
+		 MiniMaxMove BestMove = MiniMax(Player_Turn, GameUtils.MINIMAX_DIFFICULTY_LEVEL[difficultyLevel], -Float.MAX_VALUE, Float.MAX_VALUE, 1); 
+		 Move = BestMove.BestMove;
+	  
+	  
+	  
+		 posAnim= Move; 
+		 posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
+		 System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+"Col:"+ Move); 
+		 xInitial= Move;
+		 Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
+	 
+		 CopyRestoreBoard(0, 1); 
+		 } else 
+		 {
+			 // Monte Carlo 
+			 } 
+		 }
+	
 
 	public int getPosAnim() {
 		return posAnim;
