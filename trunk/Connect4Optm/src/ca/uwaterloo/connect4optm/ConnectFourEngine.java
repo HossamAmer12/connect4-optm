@@ -1,4 +1,4 @@
-//package ca.uwaterloo.connect4optm;
+package ca.uwaterloo.connect4optm;
 
 import java.lang.Math.*;
 import java.util.*;
@@ -94,6 +94,21 @@ public class ConnectFourEngine {
 
 	}
 
+	public void resetBoard(){
+		int i,j;
+		for(i=0; i<n; i++){
+			for(j=0; j<m; j++){
+				Board[i][j]=0;
+			}
+		}
+		Arrays.fill(TopPositions, -1);
+		score_cum_current=0;
+		Player_Turn=1;
+		Arrays.fill(PNumbers[0], 0);
+		Arrays.fill(PNumbers[1], 0);
+		Check_Win=0;
+		return;
+	}
 	// getting the minimum value
 	public static double getMinValue(double[] array) {
 		double minValue = array[0];
@@ -1374,9 +1389,9 @@ public class ConnectFourEngine {
 						MiniMaxMove recursiveV;
 						if (CheckWin() == currentPlayer) {
 							recursiveV = new MiniMaxMove();
-							recursiveV.V = Float.MAX_VALUE - 10000;
+							recursiveV.V = 100000000;
 						} else {
-							if (currentDepth == 9) {
+							if (currentDepth == 5) {
 								int ayd = 0;
 								ayd++;
 
@@ -1485,12 +1500,13 @@ public class ConnectFourEngine {
 		int Move = 0;
 
 		CopyRestoreBoard(1, 0);
-		Scoringfn_cum(TopPositions[latest_move], latest_move,
-				(Player_Turn == 1) ? 2 : 1);
+		//Scoringfn_cum(TopPositions[latest_move], latest_move,
+		//		(Player_Turn == 1) ? 2 : 1);
 		MiniMaxMove BestMove = MiniMax(Player_Turn, Depth, -Float.MAX_VALUE,
 				Float.MAX_VALUE, 1);
 		Move = BestMove.BestMove;
-		Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
+		
+		//Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
 
 		CopyRestoreBoard(0, 1);
 		return Move;
