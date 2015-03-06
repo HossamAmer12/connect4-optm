@@ -33,7 +33,7 @@
             android:orientation="vertical" >
 
             <TextView
-                style="@style/LabelTextSmall"
+                style="@style/LabelText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -50,11 +50,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="1dp"
-                    android:paddingRight="26dp" >
+                    android:paddingRight="10dp" >
 
                     <RadioButton
                         android:id="@+id/radio_play0"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -62,7 +62,7 @@
 
                     <RadioButton
                         android:id="@+id/radio_play1"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/players2" />
@@ -76,7 +76,7 @@
 
                     <RadioButton
                         android:id="@+id/radio_turn0"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -84,7 +84,7 @@
 
                     <RadioButton
                         android:id="@+id/radio_turn1"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/goSnd" />
@@ -122,7 +122,7 @@
 
                     <RadioButton
                         android:id="@+id/radio_diff0"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -130,14 +130,14 @@
 
                     <RadioButton
                         android:id="@+id/radio_diff1"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/level2" />
 
                     <RadioButton
                         android:id="@+id/radio_diff2"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/level3" />
@@ -148,12 +148,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" >                    
-                    <!--    android:paddingLeft="5dp"-->
+                    android:paddingLeft="5dp"
+                    android:paddingTop="10dp" >
 
                     <RadioButton
                         android:id="@+id/radio_alg0"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -161,14 +161,14 @@
 
                     <RadioButton
                         android:id="@+id/radio_alg1"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Alg2" />
                     
                      <RadioButton
                         android:id="@+id/radio_alg2"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Alg3" />
@@ -180,12 +180,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:paddingLeft="5dp"
                     android:paddingTop="10dp" >
-                     <!--  android:paddingLeft="5dp" -->
 
                     <RadioButton
                         android:id="@+id/radio_size0"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -193,14 +193,14 @@
 
                     <RadioButton
                         android:id="@+id/radio_size1"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Size2" />
 
                     <RadioButton
                         android:id="@+id/radio_size2"
-                        style="@style/MyRadioSmall"
+                        style="@style/MyRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Size3" />
@@ -218,7 +218,7 @@
 
             <Button
                 android:id="@+id/play_button"
-                style="@style/MyButtonSmall"
+                style="@style/MyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/greenbutton"
