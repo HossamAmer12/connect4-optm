@@ -304,8 +304,10 @@ public class Connect4Activity extends ActionBarActivity implements
 			mDropAreaView.reset();
 			break;
 			
-		case R.id.hint:			
-			int xDest = 2;
+		case R.id.hint:
+			
+			mBoard.mEngine.nextMoveHint_Android(mBoard.mAlgorithm, mBoard.mDifficultyLevel);
+			int xDest = mBoard.mEngine.getxInitial();
 			int yDest = 0;
 			onHintButton(xDest, yDest);
 			break;

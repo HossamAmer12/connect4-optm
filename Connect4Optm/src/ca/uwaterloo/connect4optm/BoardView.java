@@ -220,15 +220,15 @@ public class BoardView extends GridView implements
 	public void setOnPieceMovedListener(OnPieceMoved listener) {
 		this.onPieceMoved = listener;
 	}
-	
-	public void playSuccessSound(){
+
+	public void playSuccessSound() {
 		playSound(R.raw.chime1);
 	}
-	
-	public void playFailSound(){
+
+	public void playFailSound() {
 		playSound(R.raw.chime2);
 	}
-	
+
 	public void playDropSound() {
 		playSound(R.raw.drop);
 	}
@@ -269,6 +269,13 @@ public class BoardView extends GridView implements
 
 			R.drawable.green);
 		}
+	}
+
+	public void resetPieceColor() {
+
+		mPieceType = PieceType.Player1;
+		newPieceBitmap = BitmapFactory.decodeResource(mResources,
+				R.drawable.green);
 	}
 
 	public boolean isComputer() {
@@ -365,7 +372,8 @@ public class BoardView extends GridView implements
 		int posAnim = this.mEngine.getPosAnim();
 		int posDest = this.mEngine.getPosDest();
 		int xInitial = this.mEngine.getxInitial();
-
+		
+		// System.out.println("Reset Abdullah" + posAnim + " "+ posDest + " " + xInitial+ "\n");
 		// this.mEngine.PlayerMove(xInitial);
 
 		int dy = this.getChildAt(posDest).getTop();
@@ -393,15 +401,21 @@ public class BoardView extends GridView implements
 	 * Restart action
 	 */
 	public void reset() {
-		
+
 		this.isComputerPlayed = false;
 		this.isBoardEnabled = true;
 		this.setEnabled(true);
-//		this.init(this.nRows, this.nCols);
-		newGame();
+		// this.init(this.nRows, this.nCols);
 		
 		// Reset the Engine
+		this.mEngine.resetBoard();
+	
+		// Reset Piece color
+		this.resetPieceColor();
+	
 		// this.mEngine.reset();
+		
+		newGame();
 	}
 
 	public void newGame() {
@@ -410,11 +424,10 @@ public class BoardView extends GridView implements
 			this.playComputer();
 
 		}
-		
+
 	}
-	
-	public boolean isFull()
-	{
+
+	public boolean isFull() {
 		return this.mEngine.CheckFullBoard();
 	}
 

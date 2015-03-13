@@ -117,9 +117,11 @@ public class UserInputActivity extends ActionBarActivity implements
 	private int getAlgorithm() {
 		if (algGroup.getCheckedRadioButtonId() == R.id.radio_alg0) {
 			return 0;
-		} else {
+		} else if (algGroup.getCheckedRadioButtonId() == R.id.radio_alg1) {
 			return 1;
 		}
+		
+		return 2;
 
 	}
 

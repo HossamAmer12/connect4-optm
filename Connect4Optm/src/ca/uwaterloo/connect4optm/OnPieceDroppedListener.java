@@ -50,7 +50,7 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 			mBoardViewAdapter.updateTopArray(xInitial);
 
 			// Update the Engine
-			mBoardView.mEngine.PlayerMove(xInitial);
+			mBoardView.mEngine.PlayerMove_updated(xInitial);
 
 			// Toggle!
 			mBoardView.togglePieceColor();
