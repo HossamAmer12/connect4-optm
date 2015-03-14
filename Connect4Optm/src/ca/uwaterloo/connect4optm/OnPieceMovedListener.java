@@ -54,6 +54,12 @@ public class OnPieceMovedListener implements OnPieceMoved {
 			// mContext.getResources(), R.drawable.green);
 			// Debug!
 			// mBoardViewAdapter.updatePieces(0, PieceType.Player1, emptyPiece);
+			
+			// Deactivate the reset button
+			mBoardView.setReset(false);
+			
+			
+				
 
 		}
 	}

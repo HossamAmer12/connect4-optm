@@ -59,6 +59,12 @@ public class BoardView extends GridView implements
 
 	// Board Enabled?
 	private boolean isBoardEnabled;
+	
+	// Reset pressed?
+	private boolean isReset;
+	
+	// Hint enabled?
+	private boolean isHintEnabled;
 
 	public BoardView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -117,7 +123,20 @@ public class BoardView extends GridView implements
 
 		// Enable board
 		isBoardEnabled = true;
-
+		
+		// Enable/Disable the hint
+		if(this.isComputer())
+		{
+			if(this.isComputerFirst())
+				this.setHintEnabled(false);
+			else
+				this.setHintEnabled(true);
+		}
+		else
+			this.setHintEnabled(true);
+			
+		
+		
 	}
 
 	/**
@@ -363,7 +382,7 @@ public class BoardView extends GridView implements
 	public void playComputer() {
 
 		System.out.println("OnPieceDropped: Computer Move!");
-
+		
 		// Get the Engine position
 		this.mEngine.nextMoveHint_Android(this.mAlgorithm,
 				this.mDifficultyLevel);
@@ -379,6 +398,10 @@ public class BoardView extends GridView implements
 		int dy = this.getChildAt(posDest).getTop();
 		this.animatePiece(posAnim, dy, posDest, xInitial);
 		this.setComputerPlayed(true);
+		
+		// Deactivate the HintButton
+		this.setHintEnabled(false);
+						
 
 	}
 
@@ -429,6 +452,22 @@ public class BoardView extends GridView implements
 
 	public boolean isFull() {
 		return this.mEngine.CheckFullBoard();
+	}
+
+	public boolean isResetEnabled() {
+		return isReset;
+	}
+
+	public void setReset(boolean isReset) {
+		this.isReset = isReset;
+	}
+
+	public boolean isHintEnabled() {
+		return isHintEnabled;
+	}
+
+	public void setHintEnabled(boolean isHintEnabled) {
+		this.isHintEnabled = isHintEnabled;
 	}
 
 }
