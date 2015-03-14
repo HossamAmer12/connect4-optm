@@ -29,15 +29,14 @@ public class Connect4Activity extends ActionBarActivity implements
 
 	// Sliding piece
 	private DropAreaView mDropAreaView;
-	
-	
+
 	// 8x7, 9x7, 10x7, 8x8
 	public static int nCols = 7;// 7 columns --> Only changes the spaces between
 	public static int nRows = 6; // rows
-	
+
 	// Check Win textview
 	TextView mCheckWin;
-	
+
 	Button mHint;
 	Button mRestart;
 
@@ -71,12 +70,12 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Find the check win Textview
 		mCheckWin = (TextView) findViewById(R.id.player_turn);
-		
+
 		// Find the bottom buttons
 		LinearLayout container = (LinearLayout) findViewById(R.id.game_btns);
 		mRestart = (Button) container.findViewById(R.id.restart);
-		mHint  = (Button) container.findViewById(R.id.hint);
-		
+		mHint = (Button) container.findViewById(R.id.hint);
+
 		// Register the listener
 		mBoard.setOnItemClickListener(this);
 
@@ -85,17 +84,17 @@ public class Connect4Activity extends ActionBarActivity implements
 				mBoardGridAdapter, getApplicationContext(), mDropAreaView));
 
 		// OnPieceDropped listener
-//		mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
-//				mBoardGridAdapter, getApplicationContext(), mDropAreaView));
+		// mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
+		// mBoardGridAdapter, getApplicationContext(), mDropAreaView));
 
 		// OnPieceDropped listener
 		mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
-				mBoardGridAdapter, getApplicationContext(), mDropAreaView, mCheckWin));
-		
+				mBoardGridAdapter, getApplicationContext(), mDropAreaView,
+				mCheckWin));
+
 		mRestart.setOnClickListener(this);
 		mHint.setOnClickListener(this);
-	
-	
+
 	}
 
 	private void startGame() {
@@ -184,7 +183,7 @@ public class Connect4Activity extends ActionBarActivity implements
 			else
 				newPieceType = PieceType.Player1;
 
-//			mDropAreaView.togglePieceColor(newPieceType);
+			// mDropAreaView.togglePieceColor(newPieceType);
 
 		}
 
@@ -249,7 +248,7 @@ public class Connect4Activity extends ActionBarActivity implements
 		int xDest = click.getxIndex();
 		int yDest = Connect4Activity.nRows - top - 1;
 		int posDest = mBoardGridAdapter.getLinearPosition(xDest, yDest);
-//		int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
+		// int posSrc = mBoardGridAdapter.getLinearPosition(xInitial, top);
 
 		// Avoid overfill
 		if (posDest < 0)
@@ -263,12 +262,10 @@ public class Connect4Activity extends ActionBarActivity implements
 		if (mBoard.isComputer())
 			mBoard.setComputerPlayed(false);
 
-	
 		int dy = mBoard.getChildAt(posDest).getTop();
 		int posAnim = mBoardGridAdapter.getLinearPosition(xInitial, 0);
 
 		mBoard.animatePiece(posAnim, dy, posDest, xInitial);
-		
 
 	}
 
@@ -280,7 +277,7 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Move the sliding piece to that position
 		int xSlidingPiece = mDropAreaView.getBallRect().left;
-		
+
 		// Total distance
 		int dx = xAbs - xSlidingPiece;
 
@@ -298,27 +295,30 @@ public class Connect4Activity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.restart:
-			mBoardGridAdapter.resetPieces();
-			mBoard.reset();
-			mCheckWin.setText("");
-			mDropAreaView.reset();
+
+			if (mBoard.isResetEnabled()) {
+				mBoardGridAdapter.resetPieces();
+				mBoard.reset();
+				mCheckWin.setText("");
+				mDropAreaView.reset();
+			}
 			break;
-			
+
 		case R.id.hint:
-			
-			mBoard.mEngine.nextMoveHint_Android(mBoard.mAlgorithm, mBoard.mDifficultyLevel);
-			int xDest = mBoard.mEngine.getxInitial();
-			int yDest = 0;
-			onHintButton(xDest, yDest);
+
+			if (mBoard.isHintEnabled()) {
+				mBoard.mEngine.nextMoveHint_Android(mBoard.mAlgorithm,
+						mBoard.mDifficultyLevel);
+				int xDest = mBoard.mEngine.getxInitial();
+				int yDest = 0;
+				onHintButton(xDest, yDest);
+			}
 			break;
 
 		default:
 			break;
 		}
-		
-		
+
 	}
-
-
 
 }

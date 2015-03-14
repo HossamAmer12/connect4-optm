@@ -97,6 +97,12 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 
 			}
 			
+			// Activate the resetButton
+			mBoardView.setReset(true);
+			
+//			if(mBoardView.isComputerPlayed())
+				mBoardView.setHintEnabled(true);
+			
 
 			// Check the turn and computer player!
 			// computer player is 2nd
