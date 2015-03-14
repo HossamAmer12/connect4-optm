@@ -55,6 +55,12 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 			// Toggle!
 			mBoardView.togglePieceColor();
 
+			// Activate the resetButton
+			mBoardView.setReset(true);
+			
+//			if(mBoardView.isComputerPlayed())
+				mBoardView.setHintEnabled(true);
+			
 			// Check win!
 			if (mBoardView.checkWin() != 0) {
 				System.out
@@ -97,11 +103,6 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 
 			}
 			
-			// Activate the resetButton
-			mBoardView.setReset(true);
-			
-//			if(mBoardView.isComputerPlayed())
-				mBoardView.setHintEnabled(true);
 			
 
 			// Check the turn and computer player!
