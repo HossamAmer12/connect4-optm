@@ -1,4 +1,4 @@
-//package ca.uwaterloo.connect4optm;
+package ca.uwaterloo.connect4optm;
 
 import java.lang.Math.*;
 import java.util.*;
@@ -40,6 +40,7 @@ public class ConnectFourEngine {
 
 	private int Constants[][];
 	private int Constants2[][];
+	private int Constants3[][];
 	private int posAnim;
 	private int posDest;
 	private int xInitial;
@@ -87,6 +88,10 @@ public class ConnectFourEngine {
 		Constants2 = new int[2][];
 		Constants2[0] = new int[NumberOfDisks];
 		Constants2[1] = new int[NumberOfDisks];
+		
+		Constants3 = new int[2][];
+		Constants3[0] = new int[NumberOfDisks];
+		Constants3[1] = new int[NumberOfDisks];
 
 		
 		for (i = 0; i < NumberOfDisks; i++) {
@@ -96,10 +101,20 @@ public class ConnectFourEngine {
 		
 		for (i = 0; i < NumberOfDisks; i++) {
 			Constants2[0][i] = (int) Math.pow(10, (i));
-			Constants2[1][i] = (int) ((Math.pow(10, (i+1)))); // -1;
+			Constants2[1][i] = (int) ((Math.pow(10, (i+1)))-2); // -1;
 		}
 		Constants2[0][NumberOfDisks-1] = (int) Math.pow(10, (NumberOfDisks+4));
 		Constants2[1][NumberOfDisks-2] = (int) Math.pow(10, (NumberOfDisks+2));
+		Constants2[1][NumberOfDisks-1] = (int) Math.pow(10, (NumberOfDisks+4));//for depth
+		
+		//constants3 for depth
+		for (i = 0; i < NumberOfDisks; i++) {
+			Constants3[0][i] = (int) (Math.pow(10, (i+1))-2);
+			Constants3[1][i] = (int) ((Math.pow(10, (i)))); // -1;
+		}
+		Constants3[0][NumberOfDisks-1] = (int) Math.pow(10, (NumberOfDisks+4));
+		Constants3[0][NumberOfDisks-2] = (int) Math.pow(10, (NumberOfDisks+2));
+		Constants3[1][NumberOfDisks-1] = (int) Math.pow(10, (NumberOfDisks+4));//for depth
 
 		// fill arrays up with zeros
 		Arrays.fill(TopPositions, -1);
@@ -1002,9 +1017,9 @@ public class ConnectFourEngine {
 					
 						else{
 							if (Check_Win == CopyPlayer_Turn)
-								NumberOfWins[icolumn] += 1 / (((double) (NumSteps))+x);  
+								NumberOfWins[icolumn] += (1 / (((double) (NumSteps))+x));  
 							else if (Check_Win == player_inv(CopyPlayer_Turn))
-								NumberOfWins[icolumn] += -1 / (((double) (NumSteps))+x); 
+								NumberOfWins[icolumn] += (-1 / (((double) (NumSteps))+x)); 
 							}
 						}
 					/*CopyRestoreBoard(0, 1);
@@ -1026,7 +1041,7 @@ public class ConnectFourEngine {
 		double MaxNumberOfWins = -Float.MAX_VALUE;
 		BestMove = -1;
 		for (icolumn = 0; icolumn < m; icolumn++) {
-			//System.out.println("NumberOfWins[icolumn] " + NumberOfWins[icolumn]);
+			System.out.println("NumberOfWins[icolumn] " + NumberOfWins[icolumn]);
 			if (ValidColumn2[icolumn]==1) {
 				if (NumberOfWins[icolumn] > MaxNumberOfWins) {
 					BestMove = icolumn;
@@ -1076,15 +1091,14 @@ public class ConnectFourEngine {
 	SaveScore1[0] = new int[NumberOfConnectedDisks];
 	SaveScore1[1] = new int[NumberOfConnectedDisks];
 
-	int SaveScore2[][] = new int[2][];
-	SaveScore2[0] = new int[NumberOfConnectedDisks];
-	SaveScore2[1] = new int[NumberOfConnectedDisks];
+	int SaveScore3[][] = new int[2][];
+	SaveScore3[0] = new int[NumberOfConnectedDisks];
+	SaveScore3[1] = new int[NumberOfConnectedDisks];
 
 	if (CheckFullBoard()) {
 		// FUll BOARD !!!!!!!!!!!!!!!!!!!!!!!
 	}
 	check = 0;
-	Arrays.fill(iTrials, NumberOfPaths);
 	
 	check2=0;
 	//System.out.println(score_cum_current);
@@ -1096,12 +1110,23 @@ public class ConnectFourEngine {
 		}
 		else {
 			ValidColumn2[icolumn]=1;
+			//print_board();
+			CopyRestoreBoard(1, 0);
+			SaveScore1=saveScore();
+			copy_Check_Win=Check_Win;
+			
+			PlayerMove_updated(icolumn);
+			//print_board();
+			CopyRestoreBoard_2(1, 0);
+			SaveScore3=saveScore();
+			copy_Check_Win2=Check_Win;
 
-			for (Trial = 0; Trial < iTrials[icolumn]; Trial++) {
-				CopyRestoreBoard(1, 0);
-				SaveScore1=saveScore();
+			/*CopyRestoreBoard(1, 0);
+			SaveScore1=saveScore();*/
+			
+			for (Trial = 0; Trial < NumberOfPaths; Trial++) {
+				
 				NumSteps = 0;
-				PlayerMove_updated(icolumn);
 				// Checkwin and checkfull board and check valid move
 				for (idepth = 0; (Check_Win == 0) && !(CheckFullBoard()) && (idepth<depth); idepth++) { // checkwin be zero ya3ny mmkn ykoon el la3eeb el tany keseb
 
@@ -1191,19 +1216,42 @@ public class ConnectFourEngine {
 				 * NumberOfWins[icolumn] += -1 / (float) NumSteps; 
 				 * }
 				 */
+				/*if (!(CheckFullBoard()) && !(idepth<depth) && (Check_Win == 0)){
+					if (playernm!=Player_Turn)
+					System.out.println("I was the last one");
+					else
+					System.out.println("He was the last one");
+				}*/
+				
 				if (!(CheckFullBoard()))
-					for (int j = 0; j < NumberOfConnectedDisks; j++) 
-						score[icolumn] += ((Constants[0][j] * PNumbers[playernm - 1][j]) - (Constants[1][j] * PNumbers[player_inv(playernm) - 1][j]));
-				// print_board();
-				CopyRestoreBoard(0, 1);
-				restoreScore(SaveScore1);
+					for (int j = 0; j < NumberOfConnectedDisks; j++){
+						if (playernm!=Player_Turn){// lw el door msh 3alayya yeb2a kan doory el marra el 2a5eera yeb2a tabee3y
+							score[icolumn] += ((Constants2[0][j] * PNumbers[playernm - 1][j]) - (Constants2[0][j] * PNumbers[player_inv(playernm) - 1][j]));
+						
+					}else{
+						score[icolumn] += ((Constants3[0][j] * PNumbers[playernm - 1][j]) - (Constants3[0][j] * PNumbers[player_inv(playernm) - 1][j]));
+						
+					}
+					}	
+				/*CopyRestoreBoard(0, 1);
+				restoreScore(SaveScore1);*/
+			//	if ((Board[0][3]==1) && (Board[1][3]==2) && (Board[0][2]==1))
+			//	print_board();
+				CopyRestoreBoard_2(0, 1);
+				restoreScore(SaveScore3);
+				Check_Win=copy_Check_Win2;
+				//print_board();
 			}
+			CopyRestoreBoard(0, 1);
+			restoreScore(SaveScore1);
+			Check_Win=copy_Check_Win;
+			//print_board();
 		}
 	}
 	float MaxNumberOfWins = -Float.MAX_VALUE;
 	BestMove = -1;
 	for (icolumn = 0; icolumn < m; icolumn++) {
-		//System.out.println(score[icolumn]);
+		System.out.println(score[icolumn]);
 		if (ValidColumn2[icolumn]==1) {
 			if (score[icolumn] > MaxNumberOfWins) {
 				BestMove = icolumn;
@@ -1217,6 +1265,7 @@ public class ConnectFourEngine {
 	}
 	return BestMove;
 }
+		
 	/*
 	 * public int NextMoveHint_MC_Scoring_Depth(int NumberOfPaths, int depth) {
 	 * 
@@ -1574,7 +1623,6 @@ public class ConnectFourEngine {
 		return Move;
 	}
 
-	/*
 	public void nextMoveHint_Android(int algorithmType, int difficultyLevel) {
         // 0 minimax
         // 1 Monte Carlo
@@ -1629,7 +1677,7 @@ public class ConnectFourEngine {
         }
 }
 	
-*/
+
 	public int getPosAnim() {
 		return posAnim;
 	}
