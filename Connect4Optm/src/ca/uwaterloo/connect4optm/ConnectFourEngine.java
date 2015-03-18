@@ -1041,7 +1041,7 @@ public class ConnectFourEngine {
 		double MaxNumberOfWins = -Float.MAX_VALUE;
 		BestMove = -1;
 		for (icolumn = 0; icolumn < m; icolumn++) {
-			System.out.println("NumberOfWins[icolumn] " + NumberOfWins[icolumn]);
+			//System.out.println("NumberOfWins[icolumn] " + NumberOfWins[icolumn]);
 			if (ValidColumn2[icolumn]==1) {
 				if (NumberOfWins[icolumn] > MaxNumberOfWins) {
 					BestMove = icolumn;
@@ -1251,7 +1251,7 @@ public class ConnectFourEngine {
 	float MaxNumberOfWins = -Float.MAX_VALUE;
 	BestMove = -1;
 	for (icolumn = 0; icolumn < m; icolumn++) {
-		System.out.println(score[icolumn]);
+		//System.out.println(score[icolumn]);
 		if (ValidColumn2[icolumn]==1) {
 			if (score[icolumn] > MaxNumberOfWins) {
 				BestMove = icolumn;
