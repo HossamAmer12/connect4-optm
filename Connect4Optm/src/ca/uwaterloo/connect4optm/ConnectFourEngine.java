@@ -853,6 +853,32 @@ public class ConnectFourEngine {
 		return BestMove;
 	}
 
+	public int greedy(){
+		int bestmove;
+		int score_compare[];
+		score_compare= new int [m];
+		int SaveScore1[][] = new int[2][];
+		SaveScore1[0] = new int[NumberOfConnectedDisks];
+		SaveScore1[1] = new int[NumberOfConnectedDisks];
+		int i;
+		int max_score=-Integer.MAX_VALUE;
+		bestmove=-1;
+		for (i=0; i<m; i++){
+			CopyRestoreBoard(1, 0);
+			SaveScore1=saveScore();
+			PlayerMove_updated(i);
+			score_compare[i]=score_cum_current;
+			CopyRestoreBoard(0, 1);
+			restoreScore(SaveScore1);
+			if (score_compare[i]>max_score){
+				max_score=score_compare[i];
+				bestmove=i;
+			}
+		}
+		return (bestmove);
+	}
+	
+	
 	public int NextMoveHint_MC_Scoring_updated(int NumberOfPaths, double x) {
 
 		int BestMove = -1;
