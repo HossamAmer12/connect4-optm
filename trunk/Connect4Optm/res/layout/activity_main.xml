@@ -33,7 +33,7 @@
             android:orientation="vertical" >
 
             <TextView
-                style="@style/LabelTextSmall"
+                style="@style/LabelText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
