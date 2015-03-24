@@ -1567,7 +1567,7 @@ public class ConnectFourEngine {
 						Board[TopPositions[i]][i] = Player_Turn;
 
 						if (CheckWin() == currentPlayer) {
-							endNodeScore = 100000000;
+							endNodeScore = currentDepth*100000000;
 						} else {
 
 							endNodeScore = 0;
@@ -1595,7 +1595,7 @@ public class ConnectFourEngine {
 						MiniMaxMove recursiveV;
 						if (CheckWin() == currentPlayer) {
 							recursiveV = new MiniMaxMove();
-							recursiveV.V = -100000000;
+							recursiveV.V = -100000000/currentDepth;
 						} else
 
 							recursiveV = MiniMax(Player_Turn, currentDepth - 1,
