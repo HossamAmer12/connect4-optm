@@ -295,7 +295,7 @@ public class Connect4Activity extends ActionBarActivity implements
 			return;
 
 		// Move the sliding piece automatically
-		onHintButton(xDest, yDest);
+		onHintButton(xDest, yDest, true);
 
 		// Reset the computer played flag for the computer next play
 		// if (!mBoard.isComputerFirst() && mBoard.isComputer())
@@ -309,7 +309,7 @@ public class Connect4Activity extends ActionBarActivity implements
 
 	}
 
-	public void onHintButton(int x, int y) {
+	public void onHintButton(int x, int y, boolean isMove) {
 		int position = mBoardGridAdapter.getLinearPosition(x, y);
 
 		// Get the xAbs of the clicked position
@@ -327,6 +327,8 @@ public class Connect4Activity extends ActionBarActivity implements
 		Log.v("Main Activity ", "Window width : " + GameUtils.mScreenWidth);
 
 		mDropAreaView.onMove(dx, 0);
+		
+		if(!isMove) mBoard.playHintSound();
 
 	}
 
@@ -351,7 +353,7 @@ public class Connect4Activity extends ActionBarActivity implements
 						mBoard.mDifficultyLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
-				onHintButton(xDest, yDest);
+				onHintButton(xDest, yDest, false);
 			}
 			break;
 
@@ -368,7 +370,7 @@ public class Connect4Activity extends ActionBarActivity implements
 				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
-				onHintButton(xDest, yDest);
+				onHintButton(xDest, yDest, false);
 			}
 			break;
 
@@ -386,7 +388,7 @@ public class Connect4Activity extends ActionBarActivity implements
 				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
-				onHintButton(xDest, yDest);
+				onHintButton(xDest, yDest, false);
 			}
 			break;
 
@@ -405,7 +407,7 @@ public class Connect4Activity extends ActionBarActivity implements
 						mBoard.mDifficultyLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
-				onHintButton(xDest, yDest);
+				onHintButton(xDest, yDest, false);
 			}
 			break;
 
@@ -422,7 +424,7 @@ public class Connect4Activity extends ActionBarActivity implements
 				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
-				onHintButton(xDest, yDest);
+				onHintButton(xDest, yDest, false);
 			}
 			break;
 
