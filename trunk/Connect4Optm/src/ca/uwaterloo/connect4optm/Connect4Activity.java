@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import ca.uwaterloo.connect4optm.GameUtils.PieceType;
 
@@ -39,6 +41,13 @@ public class Connect4Activity extends ActionBarActivity implements
 
 	Button mHint;
 	Button mRestart;
+
+	// Demo buttons
+	Button minimax_Easy;
+	Button minimax_Hard;
+	Button greedy_hint;
+	Button mc_hint;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +103,35 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		mRestart.setOnClickListener(this);
 		mHint.setOnClickListener(this);
+
+		// Demo
+		demo(GameUtils.DEMO);
+
+	}
+
+	private void demo(boolean demo) {
+		// TODO Auto-generated method stub
+		
+		RelativeLayout demoRoot = (RelativeLayout) findViewById(R.id.demo);
+		mc_hint = (Button) demoRoot.findViewById(R.id.mc_hint);
+		minimax_Easy = (Button) demoRoot.findViewById(R.id.mm_Easy);
+		minimax_Hard = (Button) demoRoot.findViewById(R.id.mm_Hard);
+		greedy_hint = (Button) demoRoot.findViewById(R.id.greedy_hint);
+		
+		
+		if (demo) {
+			mc_hint.setOnClickListener(this);
+			minimax_Easy.setOnClickListener(this);
+			minimax_Hard.setOnClickListener(this);
+			greedy_hint.setOnClickListener(this);
+		}
+		else
+		{
+			mc_hint.setVisibility(View.GONE);
+			minimax_Easy.setVisibility(View.GONE);
+			minimax_Hard.setVisibility(View.GONE);
+			greedy_hint.setVisibility(View.GONE);
+		}
 
 	}
 
@@ -289,8 +327,6 @@ public class Connect4Activity extends ActionBarActivity implements
 		mDropAreaView.onMove(dx, 0);
 
 	}
-	
-	
 
 	@Override
 	public void onClick(View v) {
@@ -316,51 +352,47 @@ public class Connect4Activity extends ActionBarActivity implements
 				onHintButton(xDest, yDest);
 			}
 			break;
-			
+
 		// Minimax Easy hint
 		case R.id.mm_Easy:
 
 			if (mBoard.isHintEnabled()) {
-				
+
 				int algorithmType = 0;
 				int diffLevel = 0;
-				
-				mBoard.mEngine.nextMoveHint_Android(algorithmType,
-						diffLevel);
+
+				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
 				onHintButton(xDest, yDest);
 			}
 			break;
-			
-			//Minimax Hard hint
-			
+
+		// Minimax Hard hint
+
 		case R.id.mm_Hard:
-			
+
 			if (mBoard.isHintEnabled()) {
-				
+
 				int algorithmType = 0;
 				int diffLevel = 2;
 
-				mBoard.mEngine.nextMoveHint_Android(algorithmType,
-						diffLevel);
+				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
 				onHintButton(xDest, yDest);
 			}
 			break;
-			
-			
-			// MC hint
+
+		// MC hint
 		case R.id.mc_hint:
 
 			if (mBoard.isHintEnabled()) {
-				
+
 				int algorithmType = 1;
 				int diffLevel = 0;
 
-				mBoard.mEngine.nextMoveHint_Android(algorithmType,
-						diffLevel);
+				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				mBoard.mEngine.nextMoveHint_Android(mBoard.mAlgorithm,
 						mBoard.mDifficultyLevel);
 				int xDest = mBoard.mEngine.getxInitial();
@@ -368,25 +400,21 @@ public class Connect4Activity extends ActionBarActivity implements
 				onHintButton(xDest, yDest);
 			}
 			break;
-			
-			
-			// Greedy hint
+
+		// Greedy hint
 		case R.id.greedy_hint:
 
 			if (mBoard.isHintEnabled()) {
-				
+
 				int algorithmType = 2;
 				int diffLevel = 0;
-				
-				mBoard.mEngine.nextMoveHint_Android(algorithmType,
-						diffLevel);
+
+				mBoard.mEngine.nextMoveHint_Android(algorithmType, diffLevel);
 				int xDest = mBoard.mEngine.getxInitial();
 				int yDest = 0;
 				onHintButton(xDest, yDest);
 			}
 			break;
-			
-			
 
 		default:
 			break;
