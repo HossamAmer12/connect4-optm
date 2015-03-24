@@ -124,6 +124,8 @@ public class Connect4Activity extends ActionBarActivity implements
 			minimax_Easy.setOnClickListener(this);
 			minimax_Hard.setOnClickListener(this);
 			greedy_hint.setOnClickListener(this);
+			
+			// Init the board adapter
 		}
 		else
 		{
