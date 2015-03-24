@@ -29,7 +29,7 @@ public class GameUtils {
 
 	
 	//Minimax constants
-	public static final int[] MINIMAX_DIFFICULTY_LEVEL = {5, 7, 9};
+	public static final int[] MINIMAX_DIFFICULTY_LEVEL = {3, 5, 7};
 
 	
 	public static int easyLevel = 0;
