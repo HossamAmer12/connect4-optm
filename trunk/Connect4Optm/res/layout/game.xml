@@ -30,6 +30,11 @@
         android:layout_below="@id/player_turn" />
 
     <!-- Bottom Buttons -->
+	<RelativeLayout android:id="@+id/demo"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content">
+	    
+	    
 
     <LinearLayout
         android:id="@+id/game_btns"
@@ -38,6 +43,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
+        <!-- The following two button changed its style -->
         <Button
             android:id="@+id/restart"
             style="@style/MyButton"
@@ -67,8 +73,53 @@
             android:layout_weight="1"
             android:background="@drawable/greenbutton"
             android:text="@string/hint" />
+
+        
     </LinearLayout>
 
+     <Button
+            android:id="@+id/mm_Easy"
+            style="@style/MyButtonVSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenbutton"
+            android:text="@string/mm_Easy"
+            android:layout_above="@id/game_btns" />
+     
+       <Button
+            android:id="@+id/mm_Hard"
+            style="@style/MyButtonVSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenbutton"
+            android:text="@string/mm_Hard"
+            android:layout_above="@id/game_btns"
+            android:layout_toRightOf="@id/mm_Easy" />
+       
+       <Button
+            android:id="@+id/greedy_hint"
+            style="@style/MyButtonVSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenbutton"
+            android:text="@string/greedy_hint"
+            android:layout_above="@id/game_btns"
+            android:layout_toRightOf="@id/mm_Hard" />
+       
+       
+       <Button
+            android:id="@+id/mc_hint"
+            style="@style/MyButtonVSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenbutton"
+            android:text="@string/MC_hint"
+            android:layout_above="@id/game_btns"
+            android:layout_toRightOf="@id/greedy_hint" />
+       
+     
+    </RelativeLayout>
+    
     <!-- Board View -->
 
     <LinearLayout

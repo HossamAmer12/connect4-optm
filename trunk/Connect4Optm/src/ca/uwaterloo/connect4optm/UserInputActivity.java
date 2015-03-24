@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -244,7 +245,9 @@ public class UserInputActivity extends ActionBarActivity implements
 		alg0 = (RadioButton) findViewById(R.id.radio_alg0);
 		alg1 = (RadioButton) findViewById(R.id.radio_alg1);
 		alg2 = (RadioButton) findViewById(R.id.radio_alg2);
-
+		// algorithm setOnChecked
+		algGroup.setOnCheckedChangeListener(this);
+		
 		szGroup = (RadioGroup) findViewById(R.id.radio_size);
 		size0 = (RadioButton) findViewById(R.id.radio_size0);
 		size1 = (RadioButton) findViewById(R.id.radio_size1);
@@ -314,20 +317,28 @@ public class UserInputActivity extends ActionBarActivity implements
 		// ****
 		// boolean show = (getPlay()==Players.ONE_PLAYER);
 		// boolean show = (getPlay() == GameUtils.players_Num);
-		boolean show = (getPlay() == 0);
+		boolean show = (getPlay() == 0);		
+		boolean algorithm = (getAlgorithm()==0); // MM only
+
 		turnGroup.setEnabled(show);
 		turn0.setEnabled(show);
 		turn1.setEnabled(show);
-		diff0.setEnabled(show);
-		diff1.setEnabled(show);
-		diff2.setEnabled(show);
-		diffGroup.setEnabled(show);
+		
+		
+		// Disabling levels in the other algorithms
+		diffGroup.setEnabled(show && algorithm);
+		diff0.setEnabled(show && algorithm);
+		diff1.setEnabled(show && algorithm);
+		diff2.setEnabled(show && algorithm);
+		
 
 		algGroup.setEnabled(show);
 		alg0.setEnabled(show);
 		alg1.setEnabled(show);
 		alg2.setEnabled(show);
-
+		
+		
+		
 		// Two player game
 		if (!show) {
 			GameUtils.players_Num = getPlay();

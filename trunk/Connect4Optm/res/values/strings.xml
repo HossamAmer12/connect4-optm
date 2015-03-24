@@ -35,6 +35,10 @@
      <string name="play">Play</string>
      
     
+      <string name="MC_hint">MC Hint</string>
+     <string name="mm_Easy">MM Easy Hint</string>
+     <string name="mm_Hard">MM Hard Hint</string>
+     <string name="greedy_hint">Greedy Hint</string>
     
 
 </resources>
