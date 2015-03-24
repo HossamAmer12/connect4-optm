@@ -90,7 +90,7 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// OnPieceDropped listener
 		mBoard.setOnPieceMovedListener(new OnPieceMovedListener(mBoard,
-				mBoardGridAdapter, getApplicationContext(), mDropAreaView));
+				mBoardGridAdapter, getApplicationContext(), mDropAreaView, mCheckWin));
 
 		// OnPieceDropped listener
 		// mBoard.setOnPieceDroppedListener(new OnPieceDroppedListener(mBoard,
