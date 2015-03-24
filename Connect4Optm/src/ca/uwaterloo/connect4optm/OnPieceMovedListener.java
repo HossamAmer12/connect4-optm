@@ -2,6 +2,7 @@ package ca.uwaterloo.connect4optm;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.TextView;
 import ca.uwaterloo.connect4optm.GameUtils.PieceType;
 
 public class OnPieceMovedListener implements OnPieceMoved {
@@ -14,7 +15,9 @@ public class OnPieceMovedListener implements OnPieceMoved {
 
 	// static PieceType srcPieceType;
 	// static Bitmap srcBmp;
+	TextView mCheckWin;
 
+	
 	public OnPieceMovedListener(BoardView mBoardView,
 			BoardViewAdapter mBoardViewAdapter, Context mContext,
 			DropAreaView mDropAreaView) {
@@ -22,6 +25,18 @@ public class OnPieceMovedListener implements OnPieceMoved {
 		this.mBoardViewAdapter = mBoardViewAdapter;
 		this.mContext = mContext;
 		this.mDropAreaView = mDropAreaView;
+		
+	}
+	
+	public OnPieceMovedListener(BoardView mBoardView,
+			BoardViewAdapter mBoardViewAdapter, Context mContext,
+			DropAreaView mDropAreaView, TextView mCheckWin) {
+		this.mBoardView = mBoardView;
+		this.mBoardViewAdapter = mBoardViewAdapter;
+		this.mContext = mContext;
+		this.mDropAreaView = mDropAreaView;
+		this.mCheckWin = mCheckWin;
+		
 	}
 
 	@Override
@@ -43,7 +58,11 @@ public class OnPieceMovedListener implements OnPieceMoved {
 			// Update to animate
 			mBoardViewAdapter.updatePieces(posAnim, mBoardView.mPieceType,
 					mBoardView.newPieceBitmap);
-
+			
+			if (!mBoardView.isComputerPlayed() && mBoardView.isComputer()) {
+				mCheckWin.setText("Thinking...");
+			}
+			
 			// Play sound
 			mBoardView.playDropSound();
 			

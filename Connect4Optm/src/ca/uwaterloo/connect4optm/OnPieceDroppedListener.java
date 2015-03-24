@@ -39,7 +39,10 @@ public class OnPieceDroppedListener implements OnPieceDropped {
 			int xInitial) {
 
 		if (dropped) {
-
+			
+			// Restore the thinking textView
+			mCheckWin.setText("");
+			
 			// Restore the source piece type
 			mBoardViewAdapter.updatePieces(posAnim,
 					mBoardView.getSrcPieceType(), mBoardView.getSrcBmp());
