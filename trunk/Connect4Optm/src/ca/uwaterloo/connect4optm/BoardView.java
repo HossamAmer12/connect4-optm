@@ -252,6 +252,12 @@ public class BoardView extends GridView implements
 		playSound(R.raw.drop);
 	}
 
+	// http://www.soundescapestudios.com/Sound-category-pages/sound-effects-Boinks-&-Boings.html
+	public void playHintSound(){
+//		playSound(R.raw.hint);
+		playSound(R.raw.blink);
+	}
+	
 	private void playSound(int i) {
 		// SharedPreferences settings =
 		// this.getContext().getSharedPreferences(Connect4App.PREFS_NAME, 0);
