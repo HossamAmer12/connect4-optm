@@ -295,6 +295,7 @@ public class BoardView extends GridView implements
 		mPieceType = PieceType.Player1;
 		newPieceBitmap = BitmapFactory.decodeResource(mResources,
 				R.drawable.green);
+		this.invalidate();
 	}
 
 	public boolean isComputer() {
