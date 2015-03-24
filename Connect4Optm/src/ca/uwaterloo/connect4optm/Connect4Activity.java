@@ -289,6 +289,8 @@ public class Connect4Activity extends ActionBarActivity implements
 		mDropAreaView.onMove(dx, 0);
 
 	}
+	
+	
 
 	@Override
 	public void onClick(View v) {
@@ -314,6 +316,77 @@ public class Connect4Activity extends ActionBarActivity implements
 				onHintButton(xDest, yDest);
 			}
 			break;
+			
+		// Minimax Easy hint
+		case R.id.mm_Easy:
+
+			if (mBoard.isHintEnabled()) {
+				
+				int algorithmType = 0;
+				int diffLevel = 0;
+				
+				mBoard.mEngine.nextMoveHint_Android(algorithmType,
+						diffLevel);
+				int xDest = mBoard.mEngine.getxInitial();
+				int yDest = 0;
+				onHintButton(xDest, yDest);
+			}
+			break;
+			
+			//Minimax Hard hint
+			
+		case R.id.mm_Hard:
+			
+			if (mBoard.isHintEnabled()) {
+				
+				int algorithmType = 0;
+				int diffLevel = 2;
+
+				mBoard.mEngine.nextMoveHint_Android(algorithmType,
+						diffLevel);
+				int xDest = mBoard.mEngine.getxInitial();
+				int yDest = 0;
+				onHintButton(xDest, yDest);
+			}
+			break;
+			
+			
+			// MC hint
+		case R.id.mc_hint:
+
+			if (mBoard.isHintEnabled()) {
+				
+				int algorithmType = 1;
+				int diffLevel = 0;
+
+				mBoard.mEngine.nextMoveHint_Android(algorithmType,
+						diffLevel);
+				mBoard.mEngine.nextMoveHint_Android(mBoard.mAlgorithm,
+						mBoard.mDifficultyLevel);
+				int xDest = mBoard.mEngine.getxInitial();
+				int yDest = 0;
+				onHintButton(xDest, yDest);
+			}
+			break;
+			
+			
+			// Greedy hint
+		case R.id.greedy_hint:
+
+			if (mBoard.isHintEnabled()) {
+				
+				int algorithmType = 2;
+				int diffLevel = 0;
+				
+				mBoard.mEngine.nextMoveHint_Android(algorithmType,
+						diffLevel);
+				int xDest = mBoard.mEngine.getxInitial();
+				int yDest = 0;
+				onHintButton(xDest, yDest);
+			}
+			break;
+			
+			
 
 		default:
 			break;
