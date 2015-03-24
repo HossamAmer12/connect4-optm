@@ -77,14 +77,28 @@
         
     </LinearLayout>
 
+    <Button
+        android:layout_alignParentRight="true"
+            android:id="@+id/greedy_hint"
+            style="@style/MyButtonVSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenbutton"
+            android:text="@string/greedy_hint"
+            android:layout_above="@id/game_btns"
+            />
+    
      <Button
+    		
             android:id="@+id/mm_Easy"
             style="@style/MyButtonVSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/greenbutton"
             android:text="@string/mm_Easy"
-            android:layout_above="@id/game_btns" />
+            android:layout_above="@id/game_btns"
+            android:layout_toLeftOf="@id/greedy_hint" />
+     
      
        <Button
             android:id="@+id/mm_Hard"
@@ -94,17 +108,8 @@
             android:background="@drawable/greenbutton"
             android:text="@string/mm_Hard"
             android:layout_above="@id/game_btns"
-            android:layout_toRightOf="@id/mm_Easy" />
+            android:layout_toLeftOf="@id/mm_Easy" />
        
-       <Button
-            android:id="@+id/greedy_hint"
-            style="@style/MyButtonVSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/greenbutton"
-            android:text="@string/greedy_hint"
-            android:layout_above="@id/game_btns"
-            android:layout_toRightOf="@id/mm_Hard" />
        
        
        <Button
@@ -115,7 +120,7 @@
             android:background="@drawable/greenbutton"
             android:text="@string/MC_hint"
             android:layout_above="@id/game_btns"
-            android:layout_toRightOf="@id/greedy_hint" />
+            android:layout_toLeftOf="@id/mm_Hard" />
        
      
     </RelativeLayout>
