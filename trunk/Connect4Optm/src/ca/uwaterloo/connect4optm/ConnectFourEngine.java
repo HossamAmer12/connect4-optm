@@ -1676,30 +1676,21 @@ public class ConnectFourEngine {
                 CopyRestoreBoard(0, 1);
         } else if (algorithmType ==1) {
                 // Monte Carlo
+        	// Greedy
+	            int Move =NextMoveHint_MC_Scoring_updated(GameUtils.NUMBER_OF_PATHS, 700);
+	            posAnim= Move;
+	            posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
+	            System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+ "Col:"+ Move);
+	            xInitial= Move; 	
         	
         } else if (algorithmType ==2)
         {
-        	   // Greedy
-            int Move = 0;
-
-            CopyRestoreBoard(1, 0);
-            //Scoringfn_cum(TopPositions[latest_move], latest_move,
-            //                (Player_Turn == 1) ? 2 : 1);
-            MiniMaxMove BestMove = MiniMax(Player_Turn,
-                            1,
-                            -Float.MAX_VALUE, Float.MAX_VALUE, 1);
-            Move = BestMove.BestMove;
-           
-           
-           
+        	// Greedy
+            int Move = greedy();
             posAnim= Move;
             posDest= ((n-1-(TopPositions[Move]+1)))* m + Move;
             System.out.println("ConnectFourEngine: Row: "+(TopPositions[Move]+1)+ "Col:"+ Move);
             xInitial= Move;
-           
-            //Scoringfn_cum(TopPositions[Move] + 1, Move, Player_Turn);
-
-            CopyRestoreBoard(0, 1);
         }
 }
 	
