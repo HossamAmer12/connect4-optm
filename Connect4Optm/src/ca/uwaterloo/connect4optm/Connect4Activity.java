@@ -357,9 +357,11 @@ public class Connect4Activity extends ActionBarActivity implements
 
 		// Minimax Easy hint
 		case R.id.mm_Easy:
-
+			
 			if (mBoard.isHintEnabled()) {
-
+				
+				Log.v("Main Activity ", "MM Easy:" );
+				
 				int algorithmType = 0;
 				int diffLevel = 0;
 
@@ -375,7 +377,9 @@ public class Connect4Activity extends ActionBarActivity implements
 		case R.id.mm_Hard:
 
 			if (mBoard.isHintEnabled()) {
-
+				
+				Log.v("Main Activity ", "MM Hard:" );
+				
 				int algorithmType = 0;
 				int diffLevel = 2;
 
@@ -391,6 +395,8 @@ public class Connect4Activity extends ActionBarActivity implements
 
 			if (mBoard.isHintEnabled()) {
 
+				Log.v("Main Activity ", "MC hint:" );
+				
 				int algorithmType = 1;
 				int diffLevel = 0;
 
@@ -407,7 +413,9 @@ public class Connect4Activity extends ActionBarActivity implements
 		case R.id.greedy_hint:
 
 			if (mBoard.isHintEnabled()) {
-
+				
+				Log.v("Main Activity ", "Greedy:" );
+				
 				int algorithmType = 2;
 				int diffLevel = 0;
 
