@@ -242,6 +242,8 @@ public class DropAreaView extends View {
 
 	public void reset() {
 		// TODO Auto-generated method stub
+		
+		mBallImage = mContext.getResources().getDrawable(R.drawable.green);
 		mBallRect.set(0, 0, mBallSize, mBallSize);
 		this.invalidate();
 		
