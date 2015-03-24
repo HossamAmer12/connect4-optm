@@ -860,19 +860,31 @@ public class ConnectFourEngine {
 		int SaveScore1[][] = new int[2][];
 		SaveScore1[0] = new int[NumberOfConnectedDisks];
 		SaveScore1[1] = new int[NumberOfConnectedDisks];
+		
 		int i;
 		int max_score=-Integer.MAX_VALUE;
 		bestmove=-1;
 		for (i=0; i<m; i++){
-			CopyRestoreBoard(1, 0);
-			SaveScore1=saveScore();
-			PlayerMove_updated(i);
-			score_compare[i]=score_cum_current;
-			CopyRestoreBoard(0, 1);
-			restoreScore(SaveScore1);
-			if (score_compare[i]>max_score){
-				max_score=score_compare[i];
-				bestmove=i;
+			if (CheckValidMove(i)) 
+			{ 
+				CopyRestoreBoard(1, 0);
+				SaveScore1=saveScore();
+				copy_Check_Win=Check_Win;
+				PlayerMove_updated(i);
+				if (Check_Win!=0){
+					CopyRestoreBoard(0, 1);
+					restoreScore(SaveScore1);
+					Check_Win=copy_Check_Win;
+					return (i);
+				}
+				score_compare[i]=score_cum_current;
+				CopyRestoreBoard(0, 1);
+				restoreScore(SaveScore1);
+				Check_Win=copy_Check_Win;
+				if (score_compare[i]>max_score){
+					max_score=score_compare[i];
+					bestmove=i;
+				}
 			}
 		}
 		return (bestmove);
