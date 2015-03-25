@@ -42,7 +42,7 @@ public class GameUtils {
 	public static final int ANIMATION_FALLING_TIME = 960;
 	
 	// Demo?
-	public static final boolean DEMO = true;
+	public static final boolean DEMO = false;
 
 }
 
